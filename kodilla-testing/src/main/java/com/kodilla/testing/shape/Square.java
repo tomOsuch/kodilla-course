@@ -3,20 +3,20 @@ package com.kodilla.testing.shape;
 public class Square implements Shape {
 
     private String shapeName;
-    private String field;
+    private double side;
 
-    public Square(String shapeName, String field) {
+    public Square(String shapeName, double side) {
         this.shapeName = shapeName;
-        this.field = field;
+        this.side = side;
     }
 
     @Override
-    public void getShapeName() {
-
+    public String getShapeName() {
+        return shapeName;
     }
 
     @Override
-    public void getField() {
-
+    public double getField() {
+        return 0;
     }
 }

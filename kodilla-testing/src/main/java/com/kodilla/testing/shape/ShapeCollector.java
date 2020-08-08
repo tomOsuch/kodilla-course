@@ -4,12 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShapeCollector {
-    private String nameShape;
     private List<Shape> shapes = new ArrayList<>();
-
-    public ShapeCollector(String nameShape) {
-        this.nameShape = nameShape;
-    }
 
     public Shape addFigure(Shape shape) {
         return null;
@@ -25,14 +20,5 @@ public class ShapeCollector {
 
     public String showFigure() {
         return null;
-    }
-
-    public int getShapeQuantity() {
-        return shapes.size();
-    }
-
-    @Override
-    public String toString() {
-        return nameShape;
     }
 }

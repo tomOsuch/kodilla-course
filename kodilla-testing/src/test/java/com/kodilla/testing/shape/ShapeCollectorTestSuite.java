@@ -39,30 +39,31 @@ public class ShapeCollectorTestSuite {
         @Test
         void testAddFigure() {
             //Give
-            Circle circle = new Circle("Circle", "20");
-            ShapeCollector shapeCollector = new ShapeCollector("Circle");
+            Circle circle = new Circle("Circle", 3);
+            ShapeCollector shapeCollector = new ShapeCollector();
             //When
             shapeCollector.addFigure(circle);
             //Then
-            Assertions.assertEquals(1, shapeCollector.getShapeQuantity());
+            Assertions.assertEquals(1, shapeCollector.getFigure(1));
         }
 
         @Test
         void testRemoveFigure() {
             //Give
-            ShapeCollector shapeCollector = new ShapeCollector("Circle");
-            Circle circle = new Circle("Circle", "20");
+            ShapeCollector shapeCollector = new ShapeCollector();
+            Circle circle = new Circle("Circle", 3);
             //When
             boolean result = shapeCollector.removeFigure(circle);
             //Then
-            Assertions.assertFalse(result);
+            Assertions.assertTrue(result);
+            Assertions.assertNull(shapeCollector.getFigure(1));
         }
 
         @Test
         void testGetFigure() {
             //Give
-            ShapeCollector shapeCollector = new ShapeCollector("Circle");
-            Circle circle = new Circle("Circle" , "20");
+            ShapeCollector shapeCollector = new ShapeCollector();
+            Circle circle = new Circle("Circle" , 3);
             //When
             Shape retrievedCircle;
             retrievedCircle = shapeCollector.getFigure(0);
@@ -73,8 +74,8 @@ public class ShapeCollectorTestSuite {
         @Test
         void testShowFigure() {
             //Give
-            Circle circle = new Circle("Circle", "20");
-            ShapeCollector shapeCollector = new ShapeCollector("Circle");
+            Circle circle = new Circle("Circle", 3);
+            ShapeCollector shapeCollector = new ShapeCollector();
             //When
             String toString = shapeCollector.showFigure();
             //Then
@@ -95,30 +96,31 @@ public class ShapeCollectorTestSuite {
         @Test
         void testAddFigure() {
             //Give
-            Square square = new Square("Square", "20");
-            ShapeCollector shapeCollector = new ShapeCollector("Circle");
+            Square square = new Square("Square", 2);
+            ShapeCollector shapeCollector = new ShapeCollector();
             //When
             shapeCollector.addFigure(square);
             //Then
-            Assertions.assertEquals(1, shapeCollector.getShapeQuantity());
+            Assertions.assertEquals(1, shapeCollector.getFigure(1));
         }
 
         @Test
         void testRemoveFigure() {
             //Give
-            ShapeCollector shapeCollector = new ShapeCollector("Square");
-            Square square = new Square("Square", "20");
+            ShapeCollector shapeCollector = new ShapeCollector();
+            Square square = new Square("Square", 2);
             //When
             boolean result = shapeCollector.removeFigure(square);
             //Then
             Assertions.assertFalse(result);
+            Assertions.assertNull(shapeCollector.getFigure(1));
         }
 
         @Test
         void testGetFigure() {
             //Give
-            ShapeCollector shapeCollector = new ShapeCollector("Square");
-            Square square = new Square("Square", "20");
+            ShapeCollector shapeCollector = new ShapeCollector();
+            Square square = new Square("Square", 2);
             //When
             Shape retrievedSquare;
             retrievedSquare = shapeCollector.getFigure(0);
@@ -129,8 +131,8 @@ public class ShapeCollectorTestSuite {
         @Test
         void testShowFigure() {
             //Give
-            ShapeCollector shapeCollector = new ShapeCollector("Square");
-            Square square = new Square("Square", "20");
+            ShapeCollector shapeCollector = new ShapeCollector();
+            Square square = new Square("Square", 2);
             //When
             String toString = shapeCollector.showFigure();
             //Then
@@ -151,30 +153,31 @@ public class ShapeCollectorTestSuite {
         @Test
         void testAddFigure() {
             //Give
-            Triangle triangle = new Triangle("Triangle", "20");
-            ShapeCollector shapeCollector = new ShapeCollector("Triangle");
+            Triangle triangle = new Triangle("Triangle", 2, 3);
+            ShapeCollector shapeCollector = new ShapeCollector();
             //When
             shapeCollector.addFigure(triangle);
             //Then
-            Assertions.assertEquals(1, shapeCollector.getShapeQuantity());
+            Assertions.assertEquals(1, shapeCollector.getFigure(1));
         }
 
         @Test
         void testRemoveFigure() {
             //Give
-            Triangle triangle = new Triangle("Triangle", "20");
-            ShapeCollector shapeCollector = new ShapeCollector("Triangle");
+            Triangle triangle = new Triangle("Triangle", 2, 3);
+            ShapeCollector shapeCollector = new ShapeCollector();
             //When
             boolean result = shapeCollector.removeFigure(triangle);
             //Then
             Assertions.assertFalse(result);
+            Assertions.assertNull(shapeCollector.getFigure(1));
         }
 
         @Test
         void testGetFigure() {
             //Give
-            Triangle triangle = new Triangle("Triangle", "20");
-            ShapeCollector shapeCollector = new ShapeCollector("Triangle");
+            Triangle triangle = new Triangle("Triangle", 2, 3);
+            ShapeCollector shapeCollector = new ShapeCollector();
             //When
             Shape retrievedTriangle;
             retrievedTriangle = shapeCollector.getFigure(0);
@@ -185,8 +188,8 @@ public class ShapeCollectorTestSuite {
         @Test
         void testShowFigure() {
             //Give
-            Triangle triangle = new Triangle("Triangle", "20");
-            ShapeCollector shapeCollector = new ShapeCollector("Triangle");
+            Triangle triangle = new Triangle("Triangle", 2, 3);
+            ShapeCollector shapeCollector = new ShapeCollector();
             //When
             String toString = shapeCollector.showFigure();
             //Then
