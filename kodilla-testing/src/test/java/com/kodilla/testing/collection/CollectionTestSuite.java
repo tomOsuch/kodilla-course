@@ -3,6 +3,7 @@ package com.kodilla.testing.collection;
 import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -39,9 +40,8 @@ public class CollectionTestSuite {
         List<Integer> numbers = null;
         //When
         OddNumbersExterminator exterminator = new OddNumbersExterminator();
-        List<Integer> numbersOdd = null;
         //Then
-        Assertions.assertEquals(numbersOdd, exterminator.exterminate(numbers));
+        Assertions.assertNull(exterminator.exterminate(numbers));
     }
 
     @DisplayName(
@@ -57,12 +57,7 @@ public class CollectionTestSuite {
         }
         //When
         OddNumbersExterminator exterminator = new OddNumbersExterminator();
-        List<Integer> numbersOdd = new ArrayList<>();
-        for (int i = 1; i <= 10; i++) {
-            if (i %2 != 0) {
-                numbersOdd.add(i);
-            }
-        }
+        List<Integer> numbersOdd = Arrays.asList(2, 4, 6, 8, 10);
         //Then
         Assertions.assertEquals(numbersOdd, exterminator.exterminate(numbers));
     }
