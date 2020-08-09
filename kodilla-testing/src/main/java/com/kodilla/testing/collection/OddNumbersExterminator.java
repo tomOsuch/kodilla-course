@@ -6,16 +6,16 @@ import java.util.List;
 public class OddNumbersExterminator {
 
     public List<Integer> exterminate(List<Integer> numbers) {
-        List<Integer> numbersOdd = new ArrayList<>();
+        List<Integer> numbersEven = new ArrayList<>();
         if (numbers != null) {
             for (Integer number : numbers) {
                 if (number % 2 == 0) {
-                    numbersOdd.add(number);
+                    numbersEven.add(number);
                 }
             }
         } else {
-            numbersOdd = null;
+            numbersEven = null;
         }
-        return numbersOdd;
+        return numbersEven;
     }
 }

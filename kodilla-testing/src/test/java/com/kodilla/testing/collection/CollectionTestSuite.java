@@ -35,13 +35,27 @@ public class CollectionTestSuite {
     )
 
     @Test
-    void testOddNumbersExterminatorEmptyList() throws NullPointerException {
+    void testOddNumbersExterminatorNullList() throws NullPointerException {
         //Give
         List<Integer> numbers = null;
         //When
         OddNumbersExterminator exterminator = new OddNumbersExterminator();
         //Then
         Assertions.assertNull(exterminator.exterminate(numbers));
+    }
+
+    @DisplayName(
+            "when create List numberOdd" + "then List number ist Empty"
+    )
+
+    @Test
+    void testOddNumbersExterminatorEmptyList() throws NullPointerException {
+        //Give
+        List<Integer> numbers = new ArrayList<>();
+        //When
+        OddNumbersExterminator exterminator = new OddNumbersExterminator();
+        //Then
+        Assertions.assertEquals(numbers, exterminator.exterminate(numbers));
     }
 
     @DisplayName(
@@ -57,8 +71,9 @@ public class CollectionTestSuite {
         }
         //When
         OddNumbersExterminator exterminator = new OddNumbersExterminator();
-        List<Integer> numbersOdd = Arrays.asList(2, 4, 6, 8, 10);
+        List<Integer> numbersEven = Arrays.asList(2, 4, 6, 8, 10);
         //Then
-        Assertions.assertEquals(numbersOdd, exterminator.exterminate(numbers));
+        Assertions.assertEquals(numbersEven, exterminator.exterminate(numbers));
     }
+
 }
