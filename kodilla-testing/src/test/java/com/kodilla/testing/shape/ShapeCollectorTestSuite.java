@@ -127,8 +127,10 @@ public class ShapeCollectorTestSuite {
             shapeCollector.addFigure(square);
             //When
             Shape retrievedSquare = shapeCollector.getFigure(0);
+            Shape squareGetSeven = shapeCollector.getFigure(7);
             //Then
             Assertions.assertEquals(square, retrievedSquare);
+            Assertions.assertEquals(null, squareGetSeven);
         }
 
         @Test

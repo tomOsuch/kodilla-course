@@ -2,6 +2,7 @@ package com.kodilla.testing.shape;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ShapeCollector {
     private List<Shape> shapes = new ArrayList<>();
@@ -15,7 +16,7 @@ public class ShapeCollector {
     }
 
     public Shape getFigure(int n) {
-        if (!shapes.isEmpty()){
+        if (n < shapes.size()){
             return shapes.get(n);
         } else {
             return null;
@@ -23,10 +24,6 @@ public class ShapeCollector {
     }
 
     public String showFigure() {
-        String message = null;
-        for (Shape shape : shapes) {
-            message = String.join(", ", shape.getShapeName());
-        }
-        return message;
+        return shapes.stream().map(Shape::getShapeName).collect(Collectors.joining(", "));
     }
 }
