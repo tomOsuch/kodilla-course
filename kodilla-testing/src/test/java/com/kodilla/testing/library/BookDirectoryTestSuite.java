@@ -2,6 +2,9 @@ package com.kodilla.testing.library;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.runners.Parameterized;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -91,24 +94,17 @@ public class BookDirectoryTestSuite {
         verify(libraryDatabaseMock, times(0)).listBooksWithCondition(anyString());
     }
 
-    @Test
-    void testListBooksInHandsOfEmpty(){
+    @ParameterizedTest
+    @ValueSource(ints = {0, 1, 5})
+    void testListBooksInHands(int number) {
         //Given
         BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
         LibraryUser libraryUser = new LibraryUser("Jan", "Kowalski", "880124546563");
-        List<Book> resultListBooksInHands = generateListOfNBooks(0);
-        List<Book> resultListBooksInHandsOneBook = generateListOfNBooks(1);
-        List<Book> resultListBooksInHands5Books = generateListOfNBooks(5);
+        List<Book> resultListBooksInHands = generateListOfNBooks(number);
         when(libraryDatabaseMock.listBooksInHandsOf(libraryUser)).thenReturn(resultListBooksInHands);
-        when(libraryDatabaseMock.listBooksInHandsOf(libraryUser)).thenReturn(resultListBooksInHandsOneBook);
-        when(libraryDatabaseMock.listBooksInHandsOf(libraryUser)).thenReturn(resultListBooksInHands5Books);
         //When
-        List<Book> theListBooksInHandsEmpty = bookLibrary.listBooksInHandsOf(libraryUser);
-        List<Book> theListBooksInHandsOneBook = bookLibrary.listBooksInHandsOf(libraryUser);
-        List<Book> theListBooksInHands5Books = bookLibrary.listBooksInHandsOf(libraryUser);
+        List<Book> theListBooksInHands = bookLibrary.listBooksInHandsOf(libraryUser);
         //Then
-        assertEquals(0, theListBooksInHandsEmpty.size());
-        assertEquals(1, theListBooksInHandsOneBook.size());
-        assertEquals(5, theListBooksInHands5Books.size());
+        assertEquals(number, theListBooksInHands.size());
     }
 }
