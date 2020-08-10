@@ -6,8 +6,6 @@ public class TestingMain {
 
     public static void main(String[] args) {
 
-
-        //Calculator
         Calculator calculator = new Calculator();
 
         int resultAdd = calculator.add(2,1);
