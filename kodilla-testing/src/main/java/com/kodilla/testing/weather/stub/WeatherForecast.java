@@ -21,11 +21,11 @@ public class WeatherForecast {
 
     public double calculateAverageTemperature() {
         double sum = 0;
-        for (Map.Entry<String, Double> temperature : temperatures.getTemperatures().entrySet()) {
-            sum += temperature.getValue();
+        for (Double temperature : temperatures.getTemperatures().values()) {
+            sum += temperature;
         }
 
-        return sum/temperatures.getTemperatures().size();
+        return sum / temperatures.getTemperatures().size();
     }
 
     public double calculateMedianTemperature() {
@@ -36,7 +36,7 @@ public class WeatherForecast {
         if (sortTemperature.size() % 2 != 0) {
             median = sortTemperature.get((sizeList - 1) / 2);
         } else {
-            median = (sortTemperature.get(sizeList/2 - 1) + sortTemperature.get(sizeList/2)) / 2;
+            median = (sortTemperature.get(sizeList / 2 - 1) + sortTemperature.get(sizeList / 2)) / 2;
         }
 
         return median;
