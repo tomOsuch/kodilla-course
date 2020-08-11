@@ -96,15 +96,15 @@ public class BookDirectoryTestSuite {
 
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 5})
-    void testNumberOfBooksInHands(int number) {
+    void testNumberOfBooksInHands(int numberOfBooks) {
         //Given
         BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
         LibraryUser libraryUser = new LibraryUser("Jan", "Kowalski", "880124546563");
-        List<Book> resultListBooksInHands = generateListOfNBooks(number);
+        List<Book> resultListBooksInHands = generateListOfNBooks(numberOfBooks);
         when(libraryDatabaseMock.listBooksInHandsOf(libraryUser)).thenReturn(resultListBooksInHands);
         //When
         List<Book> theListBooksInHands = bookLibrary.listBooksInHandsOf(libraryUser);
         //Then
-        assertEquals(number, theListBooksInHands.size());
+        assertEquals(numberOfBooks, theListBooksInHands.size());
     }
 }
