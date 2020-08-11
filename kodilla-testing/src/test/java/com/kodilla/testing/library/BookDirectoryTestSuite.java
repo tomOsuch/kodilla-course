@@ -96,7 +96,7 @@ public class BookDirectoryTestSuite {
 
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 5})
-    void testListBooksInHands(int number) {
+    void testNumberOfBooksInHands(int number) {
         //Given
         BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
         LibraryUser libraryUser = new LibraryUser("Jan", "Kowalski", "880124546563");
