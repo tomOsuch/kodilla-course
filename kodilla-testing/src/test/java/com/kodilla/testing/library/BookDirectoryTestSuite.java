@@ -2,6 +2,9 @@ package com.kodilla.testing.library;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.runners.Parameterized;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -89,5 +92,19 @@ public class BookDirectoryTestSuite {
         // Then
         assertEquals(0, theListOfBooks10.size());
         verify(libraryDatabaseMock, times(0)).listBooksWithCondition(anyString());
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, 1, 5})
+    void testNumberOfBooksInHands(int numberOfBooks) {
+        //Given
+        BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
+        LibraryUser libraryUser = new LibraryUser("Jan", "Kowalski", "880124546563");
+        List<Book> resultListBooksInHands = generateListOfNBooks(numberOfBooks);
+        when(libraryDatabaseMock.listBooksInHandsOf(libraryUser)).thenReturn(resultListBooksInHands);
+        //When
+        List<Book> theListBooksInHands = bookLibrary.listBooksInHandsOf(libraryUser);
+        //Then
+        assertEquals(numberOfBooks, theListBooksInHands.size());
     }
 }
