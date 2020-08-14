@@ -8,10 +8,14 @@ import com.kodilla.stream.forumuser.ForumUser;
 import com.kodilla.stream.lambda.ExpressionExecutor;
 import com.kodilla.stream.reference.FunctionalCalculator;
 
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 
@@ -56,9 +60,9 @@ public class StreamMain {
 
         Map<Integer, ForumUser> theResultMapOfForumUser = theForum.getUserList().stream()
                 .filter(forumUser -> forumUser.getSex() == 'M')
-                .filter(forumUser -> LocalDate.now().getYear() - forumUser.getBirthdate().getYear() > 20)
+                .filter(forumUser -> Period.between(forumUser.getBirthdate(),LocalDate.now()).getYears() >= 20)
                 .filter(forumUser -> forumUser.getPostCount() > 0)
-                .collect(Collectors.toMap(ForumUser::getId, forumUser -> forumUser));
+                .collect(Collectors.toMap(ForumUser::getId, Function.identity()));
 
         theResultMapOfForumUser.entrySet().stream()
                 .map(entry -> entry.getKey() + ": " + entry.getValue())
