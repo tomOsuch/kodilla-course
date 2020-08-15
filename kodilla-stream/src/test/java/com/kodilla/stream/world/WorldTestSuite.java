@@ -15,16 +15,20 @@ public class WorldTestSuite {
     void testGetPeopleQuantity() {
         //Given
         World world = new World();
-        Set<Country> countries = new HashSet<>();
-        countries.add(new Country("Polska", "37970000"));
-        countries.add(new Country("Niemcy", "83020000"));
-        countries.add(new Country("Anglia", "55980000"));
+        Set<Country> countriesEurope = new HashSet<>();
+        countriesEurope.add(new Country("Polska", "37970000"));
+        countriesEurope.add(new Country("Niemcy", "83020000"));
+        countriesEurope.add(new Country("Anglia", "55980000"));
+        Set<Country> countriesAfrica = new HashSet<>();
+        countriesAfrica.add(new Country("kenia", "51390000"));
+
         Set<Continent> continents = new HashSet<>();
-        continents.add(new Continent("Europa", countries));
+        continents.add(new Continent("Europa", countriesEurope));
+        continents.add(new Continent("Africa",countriesAfrica));
         //When
         BigDecimal totalPeople = world.getPeopleQuantity(continents);
         //Then
-        BigDecimal expectedPeopleCount = new BigDecimal("176970000");
+        BigDecimal expectedPeopleCount = new BigDecimal("228360000");
         assertEquals(expectedPeopleCount, totalPeople);
     }
 }

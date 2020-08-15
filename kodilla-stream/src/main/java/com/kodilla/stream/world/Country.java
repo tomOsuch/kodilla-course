@@ -16,10 +16,6 @@ public final class Country {
         return countryName;
     }
 
-    public String getPeopleNumber() {
-        return peopleNumber;
-    }
-
     public BigDecimal getPeopleQuantity() {
         return new BigDecimal(peopleNumber);
     }
