@@ -95,14 +95,14 @@ public class BoardTestSuite {
         doneTasks.add(new TaskList("In progress"));
 
         List<Period> periodsListTask = project.getTaskLists().stream()
-                .filter(doneTasks::contains)
-                .flatMap(tl -> tl.getTasks().stream())
-                .map(n -> Period.between(n.getCreated(), LocalDate.now()))
+                .filter(taskList -> taskList.getName().equals("In progress"))
+                .flatMap(taskListInProgres -> taskListInProgres.getTasks().stream())
+                .map(date -> Period.between(date.getCreated(), LocalDate.now()))
                 .collect(toList());
 
         double averageWorkingDayOnTask = IntStream.range(0, periodsListTask.size())
-                .filter(n -> periodsListTask.get(n).getDays() > 0).
-                map(n -> periodsListTask.get(n).getDays()).average().getAsDouble();
+                .filter(n -> periodsListTask.get(n).getDays() > 0)
+                .map(n -> periodsListTask.get(n).getDays()).average().getAsDouble();
 
         //Given
         assertEquals(15, averageWorkingDayOnTask);
