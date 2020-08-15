@@ -3,9 +3,15 @@ package com.kodilla.stream.portfolio;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.time.Month;
+import java.time.Period;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -77,6 +83,29 @@ public class BoardTestSuite {
 
         //Then
         assertEquals(2, longTasks);
+    }
+
+    @Test
+    void testAddTaskListAverageWorkingOnTask() {
+        //Given
+        Board project = prepareTestData();
+
+        //When
+        List<TaskList> doneTasks = new ArrayList<>();
+        doneTasks.add(new TaskList("In progress"));
+
+        List<Period> periodsListTask = project.getTaskLists().stream()
+                .filter(doneTasks::contains)
+                .flatMap(tl -> tl.getTasks().stream())
+                .map(n -> Period.between(n.getCreated(), LocalDate.now()))
+                .collect(toList());
+
+        double averageWorkingDayOnTask = IntStream.range(0, periodsListTask.size())
+                .filter(n -> periodsListTask.get(n).getDays() > 0).
+                map(n -> periodsListTask.get(n).getDays()).average().getAsDouble();
+
+        //Given
+        assertEquals(15, averageWorkingDayOnTask);
     }
 
     private Board prepareTestData() {
