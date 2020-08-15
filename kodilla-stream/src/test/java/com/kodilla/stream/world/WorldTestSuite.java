@@ -16,11 +16,11 @@ public class WorldTestSuite {
         //Given
         World world = new World();
         Set<Country> countriesEurope = new HashSet<>();
-        countriesEurope.add(new Country("Polska", "37970000"));
-        countriesEurope.add(new Country("Niemcy", "83020000"));
-        countriesEurope.add(new Country("Anglia", "55980000"));
+        countriesEurope.add(new Country("Polska", new BigDecimal("37970000")));
+        countriesEurope.add(new Country("Niemcy", new BigDecimal("83020000")));
+        countriesEurope.add(new Country("Anglia", new BigDecimal("55980000")));
         Set<Country> countriesAfrica = new HashSet<>();
-        countriesAfrica.add(new Country("kenia", "51390000"));
+        countriesAfrica.add(new Country("kenia", new BigDecimal("51390000")));
 
         Set<Continent> continents = new HashSet<>();
         continents.add(new Continent("Europa", countriesEurope));

@@ -5,9 +5,9 @@ import java.math.BigDecimal;
 public final class Country {
 
     private final String countryName;
-    private final String peopleNumber;
+    private final BigDecimal peopleNumber;
 
-    public Country(String countryName, String peopleNumber) {
+    public Country(String countryName, BigDecimal peopleNumber) {
         this.countryName = countryName;
         this.peopleNumber = peopleNumber;
     }
@@ -17,6 +17,6 @@ public final class Country {
     }
 
     public BigDecimal getPeopleQuantity() {
-        return new BigDecimal(peopleNumber);
+        return peopleNumber;
     }
 }
