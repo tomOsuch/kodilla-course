@@ -6,11 +6,10 @@ import java.util.stream.IntStream;
 
 public interface ArrayOperations {
     static double getAverage(int[] numbers) {
-        Arrays.stream(numbers).boxed()
+        Arrays.stream(numbers)
                 .forEach(System.out::println);
-       OptionalDouble averagetab = IntStream.range(0, numbers.length)
-               .mapToLong(i -> numbers[i])
-               .average();
-       return averagetab.getAsDouble();
+       return IntStream.range(0, numbers.length)
+               .map(i -> numbers[i])
+               .average().getAsDouble();
     }
 }
