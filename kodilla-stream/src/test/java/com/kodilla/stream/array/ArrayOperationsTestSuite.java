@@ -2,9 +2,6 @@ package com.kodilla.stream.array;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.OptionalDouble;
-import java.util.stream.IntStream;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
