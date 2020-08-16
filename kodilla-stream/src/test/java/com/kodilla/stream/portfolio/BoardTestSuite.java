@@ -3,15 +3,11 @@ package com.kodilla.stream.portfolio;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.time.Period;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
+import java.util.OptionalDouble;
+
 
 import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -100,9 +96,11 @@ public class BoardTestSuite {
                 .map(date -> Period.between(date.getCreated(), LocalDate.now()))
                 .collect(toList());
 
-        double averageWorkingDayOnTask = IntStream.range(0, periodsListTask.size())
-                .filter(n -> periodsListTask.get(n).getDays() > 0)
-                .map(n -> periodsListTask.get(n).getDays()).average().getAsDouble();
+        double averageWorkingDayOnTask = periodsListTask.stream()
+                .filter(periodList -> periodList.getDays() > 0)
+                .mapToInt(Period::getDays)
+                .average()
+                .getAsDouble();
 
         //Given
         assertEquals(15, averageWorkingDayOnTask);
