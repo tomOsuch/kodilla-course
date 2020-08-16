@@ -40,15 +40,15 @@ public class ForumStatisticCalc {
         postsCount = statistics.postsCount();
         commentsCount = statistics.commentsCount();
 
-        if (statistics.userName().size() != 0) {
-            averageCommentsOfUserCount = (double) statistics.commentsCount() / statistics.userName().size();
-            averagePostsOfUserCount = (double) statistics.postsCount() / statistics.userName().size();
+        if (userCount != 0) {
+            averageCommentsOfUserCount = (double) commentsCount / userCount;
+            averagePostsOfUserCount = (double) postsCount / userCount;
         } else {
             averagePostsOfUserCount = 0;
             averageCommentsOfUserCount = 0;
         }
-        if (statistics.postsCount() != 0) {
-            averageCommentsOfPostCount = (double) statistics.commentsCount() / statistics.postsCount();
+        if (postsCount != 0) {
+            averageCommentsOfPostCount = (double) commentsCount / postsCount;
         }
          else {
             averageCommentsOfPostCount = 0;
