@@ -97,8 +97,8 @@ public class BoardTestSuite {
                 .collect(toList());
 
         double averageWorkingDayOnTask = periodsListTask.stream()
-                .filter(periodList -> periodList.getDays() > 0)
                 .mapToInt(Period::getDays)
+                .filter(periodList -> periodList > 0)
                 .average()
                 .getAsDouble();
 
