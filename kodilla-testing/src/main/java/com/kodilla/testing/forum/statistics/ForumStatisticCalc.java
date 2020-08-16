@@ -1,67 +1,58 @@
 package com.kodilla.testing.forum.statistics;
 
 
-import java.util.List;
-
 public class ForumStatisticCalc {
 
-    private double userCount;
-    private double postsCount;
-    private double commentsCount;
+    private int userCount;
+    private int postsCount;
+    private int commentsCount;
     private double averagePostsOfUserCount;
     private double averageCommentsOfUserCount;
     private double averageCommentsOfPostCount;
 
-    public double getUserCount() {
+    public int getUserCount() {
         return userCount;
     }
 
-    public void setUserCount(double userCount) {
-        this.userCount = userCount;
-    }
-
-    public double getPostsCount() {
+    public int getPostsCount() {
         return postsCount;
     }
 
-    public void setPostsCount(double postsCount) {
-        this.postsCount = postsCount;
-    }
-
-    public double getCommentsCount() {
+    public int getCommentsCount() {
         return commentsCount;
-    }
-
-    public void setCommentsCount(double commentsCount) {
-        this.commentsCount = commentsCount;
     }
 
     public double getAveragePostsOfUserCount() {
         return averagePostsOfUserCount;
     }
 
-    public void setAveragePostsOfUserCount(double averagePostsOfUserCount) {
-        this.averagePostsOfUserCount = averagePostsOfUserCount;
-    }
-
     public double getAverageCommentsOfUserCount() {
         return averageCommentsOfUserCount;
-    }
-
-    public void setAverageCommentsOfUserCount(double averageCommentsOfUserCount) {
-        this.averageCommentsOfUserCount = averageCommentsOfUserCount;
     }
 
     public double getAverageCommentsOfPostCount() {
         return averageCommentsOfPostCount;
     }
 
-    public void setAverageCommentsOfPostCount(double averageCommentsOfPostCount) {
-        this.averageCommentsOfPostCount = averageCommentsOfPostCount;
-    }
+    public void calculateAdvStatisticsUserList(Statistics statistics) {
 
-    public int calculateAdvStatisticsUserList(Statistics statistics) {
-        return statistics.userName().size();
+        userCount = statistics.userName().size();
+        postsCount = statistics.postsCount();
+        commentsCount = statistics.commentsCount();
+
+        if (statistics.userName().size() != 0) {
+            averageCommentsOfUserCount = (double) statistics.commentsCount() / statistics.userName().size();
+            averagePostsOfUserCount = (double) statistics.postsCount() / statistics.userName().size();
+        } else {
+            averagePostsOfUserCount = 0;
+            averageCommentsOfUserCount = 0;
+        }
+        if (statistics.postsCount() != 0) {
+            averageCommentsOfPostCount = (double) statistics.commentsCount() / statistics.postsCount();
+        }
+         else {
+            averageCommentsOfPostCount = 0;
+        }
     }
 
 }
