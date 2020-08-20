@@ -1,6 +1,6 @@
-package com.kodilla.exception.io;
+package com.kodilla.exception.test;
 
-import com.kodilla.exception.test.SecondChallenge;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -17,10 +17,10 @@ public class SecondChallengeTestSuite {
     @MethodSource("data")
     void testProbablyIWillThrowException(double numberX, double numberY) {
         //Given
-        SecondChallenge secondChallenge = new SecondChallenge();
+        ExceptionHandling exceptionHandling = new ExceptionHandling();
 
         //When & Then
-        assertThrows(Exception.class, () -> secondChallenge.probablyIWillThrowException(numberX, numberY));
+        assertThrows(Exception.class, () -> exceptionHandling.probablyIWillThrowExceptionHandling(numberX, numberY));
     }
 
     public static Stream data() {
@@ -37,10 +37,10 @@ public class SecondChallengeTestSuite {
     @Test
     void testProbablyIWillDoseNotThrowException() {
         //Given
-        SecondChallenge secondChallenge = new SecondChallenge();
+        ExceptionHandling exceptionHandling = new ExceptionHandling();
 
         //When & Then
-        assertDoesNotThrow(() -> secondChallenge.probablyIWillThrowException(1.5, 3));
+        assertDoesNotThrow(() -> exceptionHandling.probablyIWillThrowExceptionHandling(1.5, 3));
     }
 
 }
