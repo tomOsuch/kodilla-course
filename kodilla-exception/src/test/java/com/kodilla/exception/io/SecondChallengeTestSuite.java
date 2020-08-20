@@ -2,25 +2,45 @@ package com.kodilla.exception.io;
 
 import com.kodilla.exception.test.SecondChallenge;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 
 public class SecondChallengeTestSuite {
 
-    @Test
-    void testProbablyIWillThrowException() {
+    @ParameterizedTest
+    @MethodSource("data")
+    void testProbablyIWillThrowException(double numberX, double numberY) {
         //Given
         SecondChallenge secondChallenge = new SecondChallenge();
-        //When & Then
-        assertAll(
-                () -> assertThrows(Exception.class,() -> secondChallenge.probablyIWillThrowException(2, 2)),
-                () -> assertThrows(Exception.class,() -> secondChallenge.probablyIWillThrowException(0, 2)),
-                () -> assertThrows(Exception.class,() -> secondChallenge.probablyIWillThrowException(4, 1.5)),
-                () -> assertThrows(Exception.class,() -> secondChallenge.probablyIWillThrowException(2, 1.5)),
-                () -> assertThrows(Exception.class,() -> secondChallenge.probablyIWillThrowException(0, 1.5)),
-                () -> assertDoesNotThrow(() -> secondChallenge.probablyIWillThrowException(1.5, 3))
 
+        //When & Then
+        assertThrows(Exception.class, () -> secondChallenge.probablyIWillThrowException(numberX, numberY));
+    }
+
+    public static Stream data() {
+        return Stream.of(
+                Arguments.of(2, 2),
+                Arguments.of(0, 2),
+                Arguments.of(4, 1.5),
+                Arguments.of(2, 1.5),
+                Arguments.of(2, 1.5),
+                Arguments.of(0, 1.5)
         );
     }
+
+    @Test
+    void testProbablyIWillDoseNotThrowException() {
+        //Given
+        SecondChallenge secondChallenge = new SecondChallenge();
+
+        //When & Then
+        assertDoesNotThrow(() -> secondChallenge.probablyIWillThrowException(1.5, 3));
+    }
+
 }
