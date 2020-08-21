@@ -35,14 +35,14 @@ public class SecondChallengeTestSuite {
     }
 
     @Test
-    void testProbablyIWillDoseNotThrowException() {
+    void testReturnValueProbablyIWillThrowException() {
         //Given
         ExceptionHandling exceptionHandling = new ExceptionHandling();
         SecondChallenge secondChallenge = new SecondChallenge();
-
-        //When & Then
-        assertDoesNotThrow(() -> exceptionHandling.probablyIWillThrowExceptionHandling(1.5, 3));
-        assertEquals("Done!", exceptionHandling.probablyIWillThrowExceptionHandling(1.5, 3));
+        //When
+        String result = exceptionHandling.probablyIWillThrowExceptionHandling(1.5, 3);
+        //Then
+        assertEquals("Done!", result);
     }
 
 }

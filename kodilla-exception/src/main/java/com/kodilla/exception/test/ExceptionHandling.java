@@ -5,8 +5,7 @@ public class ExceptionHandling {
     public String probablyIWillThrowExceptionHandling(double x, double y) {
         SecondChallenge secondChallenge = new SecondChallenge();
         try {
-            String result = secondChallenge.probablyIWillThrowException(x, y);
-            return result;
+            return secondChallenge.probablyIWillThrowException(x, y);
         } catch (Exception e) {
             return "Warunek w metodzie nie jest spełniony";
         } finally {
