@@ -2,15 +2,14 @@ package com.kodilla.exception.test;
 
 public class ExceptionHandling {
 
-    public String probablyIWillThrowExceptionHandling(double x, double y) {
+    public static void main(String[] args) {
         SecondChallenge secondChallenge = new SecondChallenge();
         try {
-            return secondChallenge.probablyIWillThrowException(x, y);
+            System.out.println(secondChallenge.probablyIWillThrowException(1.5, 3));
         } catch (Exception e) {
-            return "Warunek w metodzie nie jest spełniony";
+            System.out.println("Warunek w metodzie nie jest spełniony");
         } finally {
             System.out.println("Działa try-catch-finally");
         }
-
     }
 }

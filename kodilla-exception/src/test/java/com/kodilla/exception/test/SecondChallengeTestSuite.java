@@ -35,11 +35,11 @@ public class SecondChallengeTestSuite {
     }
 
     @Test
-    void testReturnValueProbablyIWillThrowException() {
+    void testReturnValueProbablyIWillThrowException() throws Exception {
         //Given
-        ExceptionHandling exceptionHandling = new ExceptionHandling();
+        SecondChallenge secondChallenge = new SecondChallenge();
         //When
-        String result = exceptionHandling.probablyIWillThrowExceptionHandling(1.5, 3);
+        String result = secondChallenge.probablyIWillThrowException(1.5, 3);
         //Then
         assertEquals("Done!", result);
     }
