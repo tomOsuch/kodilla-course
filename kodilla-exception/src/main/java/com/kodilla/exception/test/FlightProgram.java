@@ -12,5 +12,11 @@ public class FlightProgram {
             System.out.println(flights.getKey() + "; " + flights.getValue());
         }
 
+        try {
+            System.out.println(flightSearch.findFlight(flight));
+        } catch (RouteNotFoundException e) {
+            System.out.println("Nie ma takiego lotu");
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 package com.kodilla.exception.test;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class FlightSearch {
 
@@ -13,7 +14,17 @@ public class FlightSearch {
         flightsSearch.put("EPKK", false);
     }
 
-    public void findFlight(Flight flight) throws RouteNotFoundException {
+    public String findFlight(Flight flight) throws RouteNotFoundException {
+        List<String> airportTrue = flightsSearch.entrySet().stream()
+                .filter(Map.Entry::getValue)
+                .map(a -> a.getKey())
+                .filter(f -> f.equals(flight.getArrivalAirport()))
+                .collect(Collectors.toList());
 
+        if (airportTrue.size() == 0) {
+            throw new RouteNotFoundException();
+        }
+
+        return "Lot do: " + flight.getArrivalAirport() + " ok!";
     }
 }
