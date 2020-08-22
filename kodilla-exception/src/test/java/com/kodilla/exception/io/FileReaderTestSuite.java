@@ -1,5 +1,6 @@
 package com.kodilla.exception.io;
 
+import com.kodilla.exception.test.ExceptionHandling;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
