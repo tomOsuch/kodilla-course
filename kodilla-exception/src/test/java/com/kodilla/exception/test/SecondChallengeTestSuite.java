@@ -17,10 +17,10 @@ public class SecondChallengeTestSuite {
     @MethodSource("data")
     void testProbablyIWillThrowException(double numberX, double numberY) {
         //Given
-        ExceptionHandling exceptionHandling = new ExceptionHandling();
+        SecondChallenge secondChallenge = new SecondChallenge();
 
         //When & Then
-        assertThrows(Exception.class, () -> exceptionHandling.probablyIWillThrowExceptionHandling(numberX, numberY));
+        assertThrows(Exception.class, () -> secondChallenge.probablyIWillThrowException(numberX, numberY));
     }
 
     public static Stream data() {
@@ -38,7 +38,6 @@ public class SecondChallengeTestSuite {
     void testReturnValueProbablyIWillThrowException() {
         //Given
         ExceptionHandling exceptionHandling = new ExceptionHandling();
-        SecondChallenge secondChallenge = new SecondChallenge();
         //When
         String result = exceptionHandling.probablyIWillThrowExceptionHandling(1.5, 3);
         //Then
