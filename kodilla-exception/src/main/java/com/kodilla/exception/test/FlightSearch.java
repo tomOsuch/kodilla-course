@@ -17,7 +17,7 @@ public class FlightSearch {
     public String findFlight(Flight flight) throws RouteNotFoundException {
         List<String> airportTrue = flightsSearch.entrySet().stream()
                 .filter(Map.Entry::getValue)
-                .map(a -> a.getKey())
+                .map(Map.Entry::getKey)
                 .filter(f -> f.equals(flight.getArrivalAirport()))
                 .collect(Collectors.toList());
 
