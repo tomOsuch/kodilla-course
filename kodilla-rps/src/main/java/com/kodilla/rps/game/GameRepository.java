@@ -4,9 +4,11 @@ public interface GameRepository {
 
     void showIntroGame();
 
+    int playerSelectionGame();
+
     void manualGame();
 
-    int calculateResultOfGame();
+    int calculateResultOfGame(int wygrany);
 
     void showResultGame();
 }
