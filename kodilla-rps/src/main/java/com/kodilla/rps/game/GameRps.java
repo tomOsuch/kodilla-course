@@ -10,6 +10,8 @@ public class GameRps implements GameRepository {
     private final int kamien = 1;
     private final int papier = 2;
     private final int nozyce = 3;
+    private int wygrana = 0;
+
     private PlayerState playerState;
 
     @Override
@@ -41,6 +43,7 @@ public class GameRps implements GameRepository {
     @Override
     public void manualGame() {
         int count = 1;
+
         do {
             Random random = new Random();
             int computerSelectionGame = random.nextInt(3) + 1;
@@ -51,6 +54,7 @@ public class GameRps implements GameRepository {
                     System.out.println("Kamień");
                     if (player == papier) {
                         System.out.println("Wygrałeś");
+                        wygrana++;
                     } else if (player == nozyce) {
                         System.out.println("Przegrałeś");
                     } else {
@@ -63,6 +67,7 @@ public class GameRps implements GameRepository {
                         System.out.println("Przegrałeś");
                     } else if (player == nozyce) {
                         System.out.println("Wygrałeś");
+                        wygrana++;
                     } else {
                         System.out.println("Remis");
                     }
@@ -71,6 +76,7 @@ public class GameRps implements GameRepository {
                     System.out.println("Nożyce");
                     if (player == kamien) {
                         System.out.println("Wygrałeś");
+                        wygrana++;
                     } else if (player == papier) {
                         System.out.println("Przegrałeś");
                     } else {
@@ -78,20 +84,13 @@ public class GameRps implements GameRepository {
                     }
             }
 
-            count++;
-        } while (count == playerState.getGameCount()) ;
 
-    }
-
-    @Override
-    public int calculateResultOfGame(int wygrany) {
-        int wins = 0;
-
-        return wins;
+        } while (wygrana != playerState.getGameCount()) ;
     }
 
     @Override
     public void showResultGame() {
-
+        System.out.println("------------- BRAWO!! " + playerState.getUsername() + " -------------");
+        System.out.println("Wygrałeś: " + wygrana + " razy!");
     }
 }

@@ -8,7 +8,5 @@ public interface GameRepository {
 
     void manualGame();
 
-    int calculateResultOfGame(int wygrany);
-
     void showResultGame();
 }

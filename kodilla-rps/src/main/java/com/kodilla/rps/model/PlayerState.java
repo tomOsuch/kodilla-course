@@ -4,7 +4,7 @@ public class PlayerState {
 
     private String username;
     private int gameCount;
-    private int stateGame = 0;
+
 
     public PlayerState(String username, int gameCount) {
         this.username = username;
@@ -19,7 +19,4 @@ public class PlayerState {
         return gameCount;
     }
 
-    public int getStateGame() {
-        return stateGame;
-    }
 }

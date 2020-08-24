@@ -9,5 +9,6 @@ public class RpsRunner {
 
         gameRps.showIntroGame();
         gameRps.manualGame();
+        gameRps.showResultGame();
     }
 }
