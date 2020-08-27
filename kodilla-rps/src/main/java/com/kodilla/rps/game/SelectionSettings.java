@@ -1,5 +1,7 @@
 package com.kodilla.rps.game;
 
+import com.kodilla.rps.enumgame.Artefact;
+
 import java.util.Random;
 
 public class SelectionSettings {
@@ -17,9 +19,9 @@ public class SelectionSettings {
     public Artefact selectionArtefact(int selection) {
         Artefact artefactSelection = null;
         switch (selection) {
-            case 1 -> artefactSelection = Artefact.KAMIEN;
-            case 2 -> artefactSelection = Artefact.PAPIER;
-            case 3 -> artefactSelection = Artefact.NOZYCE;
+            case 1 -> artefactSelection = Artefact.ROCK;
+            case 2 -> artefactSelection = Artefact.PAPER;
+            case 3 -> artefactSelection = Artefact.SCISSORS;
         }
         return artefactSelection;
     }
