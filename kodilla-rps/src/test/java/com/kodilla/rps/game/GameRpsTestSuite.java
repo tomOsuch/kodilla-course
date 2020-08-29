@@ -4,10 +4,9 @@ package com.kodilla.rps.game;
 
 import com.kodilla.rps.enumgame.Artefact;
 import com.kodilla.rps.enumgame.Result;
-import com.kodilla.rps.model.GameSettings;
 import org.junit.jupiter.api.Test;
 
-import static com.kodilla.rps.enumgame.Result.PLAYER_WINS;
+import static com.kodilla.rps.enumgame.Result.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GameRpsTestSuite {
@@ -16,23 +15,35 @@ public class GameRpsTestSuite {
     @Test
     void testSelectWinnerPlayer() {
         //Given
-        GameRps gameRps = new GameRps();
+        LogicGameRps gameRps = new LogicGameRps();
         Artefact playerSelect = Artefact.ROCK;
-        Artefact computerSelect = Artefact.SCISSORS;
+        Artefact computerSelectLost = Artefact.SCISSORS;
+        Artefact computerSelectWins = Artefact.PAPER;
+        Artefact computerSelectDraw = Artefact.ROCK;
         //When
-        Result result = gameRps.selectWinner(playerSelect, computerSelect);
+        Result resultPlayerWins = gameRps.selectWinner(playerSelect, computerSelectLost);
+        Result resultPlayerLost = gameRps.selectWinner(playerSelect, computerSelectWins);
+        Result resultPlayerDraw = gameRps.selectWinner(playerSelect, computerSelectDraw);
         //Then
-        assertEquals(PLAYER_WINS, result);
+        assertEquals(PLAYER_WINS, resultPlayerWins);
+        assertEquals(COMPUTER_WINS, resultPlayerLost);
+        assertEquals(DRAW, resultPlayerDraw);
     }
 
     @Test
-    void testUpdatePointPlayer() {
+    void testPlayerSelectionArtefact() {
         //Given
-        GameRps gameRps = new GameRps();
-        GameSettings gameSettings = new GameSettings("test", 1);
+        LogicGameRps gameRps = new LogicGameRps();
+        int selection1 = 1;
+        int selection2 = 2;
+        int selection3 = 3;
         //When
-        boolean updatePointResult = gameRps.updatePoint(PLAYER_WINS, gameSettings);
+        Artefact result1 = gameRps.playerSelectionArtefact(selection1);
+        Artefact result2 = gameRps.playerSelectionArtefact(selection2);
+        Artefact result3 = gameRps.playerSelectionArtefact(selection3);
         //Then
-        assertTrue(updatePointResult);
+        assertEquals(Artefact.ROCK, result1);
+        assertEquals(Artefact.PAPER, result2);
+        assertEquals(Artefact.SCISSORS, result3);
     }
 }
