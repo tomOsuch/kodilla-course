@@ -33,14 +33,14 @@ public class GameRpsTestSuite {
     @Test
     void testPlayerSelectionArtefact() {
         //Given
-        LogicGameRps gameRps = new LogicGameRps();
+        ShowGameRps showGameRps = new ShowGameRps();
         int selection1 = 1;
         int selection2 = 2;
         int selection3 = 3;
         //When
-        Artefact result1 = gameRps.playerSelectionOfArtefact(selection1);
-        Artefact result2 = gameRps.playerSelectionOfArtefact(selection2);
-        Artefact result3 = gameRps.playerSelectionOfArtefact(selection3);
+        Artefact result1 = showGameRps.playerSelectionOfArtefact(selection1);
+        Artefact result2 = showGameRps.playerSelectionOfArtefact(selection2);
+        Artefact result3 = showGameRps.playerSelectionOfArtefact(selection3);
         //Then
         assertEquals(Artefact.ROCK, result1);
         assertEquals(Artefact.PAPER, result2);
