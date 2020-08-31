@@ -6,12 +6,13 @@ import com.kodilla.rps.model.*;
 
 import java.util.*;
 
-public class LogicGameRps implements LogicGame {
+public class LogicGameRps implements GameLogic {
 
     private GameSettings gameSettings;
 
     private int computerResult = 0;
     private int playerResult = 0;
+    private Random random = new Random();
 
     static Map<Artefact, Artefact> artefactMapWins;
 
@@ -35,25 +36,16 @@ public class LogicGameRps implements LogicGame {
     }
 
     @Override
-    public void initializingGameSettings() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Gra Kamień, Nożyce, Papier");
-        System.out.println("Podaj nazwę gracza");
-        String playerName = scanner.nextLine();
-        System.out.println("Wskasz do jakiej liczby wygranych chcesz grać");
-        int gameCount = scanner.nextInt();
-        gameSettings = new GameSettings(playerName, gameCount);
-        System.out.println("Witaj: " + playerName + "; bedziesz grał do: " + gameCount + " wygranych!");
+    public GameSettings createGameSettings(String username, int winsCount) {
+        gameSettings = new GameSettings(username, winsCount);
+        return gameSettings;
     }
 
     @Override
     public Result selectWinner(Artefact playerArtefact, Artefact computerArtefact) {
-
-        Map<Artefact, Artefact> winsWith = artefactMapWins;
-
-        if (winsWith.containsKey(playerArtefact) && computerArtefact.equals(winsWith.get(playerArtefact))) {
+        if (artefactMapWins.containsKey(playerArtefact) && computerArtefact.equals(artefactMapWins.get(playerArtefact))) {
             return Result.PLAYER_WINS;
-        } else if (winsWith.containsKey(computerArtefact) && playerArtefact.equals(winsWith.get(computerArtefact))) {
+        } else if (artefactMapWins.containsKey(computerArtefact) && playerArtefact.equals(artefactMapWins.get(computerArtefact))) {
             return Result.COMPUTER_WINS;
         } else {
             return Result.DRAW;
@@ -73,22 +65,21 @@ public class LogicGameRps implements LogicGame {
     }
 
     @Override
-    public Artefact playerSelectionArtefact(int selectionNumber) {
-        return selectionArtefact(selectionNumber);
+    public Artefact computerSelectionOfArtefact() {
+        int randomSelection = random.nextInt(3) + 1;
+        return selectionOfArtefact(randomSelection);
     }
 
-    @Override
-    public Artefact computerSelectionGame(int number) {
-        return selectionArtefact(number);
-    }
-
-    private Artefact selectionArtefact(int selection) {
-        Artefact artefactSelection = null;
+    public Artefact selectionOfArtefact(int selection) {
         switch (selection) {
-            case 1 -> artefactSelection = Artefact.ROCK;
-            case 2 -> artefactSelection = Artefact.PAPER;
-            case 3 -> artefactSelection = Artefact.SCISSORS;
+            case 1:
+                return Artefact.ROCK;
+            case 2:
+                return Artefact.PAPER;
+            case 3:
+                return Artefact.SCISSORS;
+            default:
+                return null;
         }
-        return artefactSelection;
     }
 }

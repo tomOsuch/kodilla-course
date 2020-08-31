@@ -3,7 +3,6 @@ package com.kodilla.rps.game;
 import com.kodilla.rps.enumgame.Artefact;
 import com.kodilla.rps.enumgame.Result;
 
-import java.util.Random;
 import java.util.Scanner;
 
 public class ApplicationGame {
@@ -13,16 +12,14 @@ public class ApplicationGame {
 
     public void playGame() {
         gameRps = facadeGame.getGameRps();
-        gameRps.initializingGameSettings();
+        facadeGame.initializeGameSettings();
         Result resultGame;
         do {
             Scanner scanner = new Scanner(System.in);
             System.out.println("Podaj swój wybór : 1 - kamień, 2 - papier, 3 - nożyce");
             int selection = scanner.nextInt();
-            Artefact playerArtefact = gameRps.playerSelectionArtefact(selection);
-            Random random = new Random();
-            int randomSelection = random.nextInt(3) + 1;
-            Artefact computerArtefact = gameRps.computerSelectionGame(randomSelection);
+            Artefact playerArtefact = facadeGame.playerSelectionOfArtefact(selection);
+            Artefact computerArtefact = gameRps.computerSelectionOfArtefact();
             System.out.println("Twój wybór: " + playerArtefact + "; Komputer: " + computerArtefact);
             resultGame = gameRps.selectWinner(playerArtefact, computerArtefact);
             facadeGame.showGameplayResult(resultGame);

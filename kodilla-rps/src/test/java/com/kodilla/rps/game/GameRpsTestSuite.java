@@ -38,9 +38,9 @@ public class GameRpsTestSuite {
         int selection2 = 2;
         int selection3 = 3;
         //When
-        Artefact result1 = gameRps.playerSelectionArtefact(selection1);
-        Artefact result2 = gameRps.playerSelectionArtefact(selection2);
-        Artefact result3 = gameRps.playerSelectionArtefact(selection3);
+        Artefact result1 = gameRps.playerSelectionOfArtefact(selection1);
+        Artefact result2 = gameRps.playerSelectionOfArtefact(selection2);
+        Artefact result3 = gameRps.playerSelectionOfArtefact(selection3);
         //Then
         assertEquals(Artefact.ROCK, result1);
         assertEquals(Artefact.PAPER, result2);
