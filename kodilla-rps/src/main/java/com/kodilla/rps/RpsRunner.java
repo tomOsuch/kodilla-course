@@ -1,12 +1,12 @@
 package com.kodilla.rps;
 
-import com.kodilla.rps.game.ApplicationGame;
+import com.kodilla.rps.game.RpsGame;
 
 
 public class RpsRunner {
 
     public static void main(String[] args) {
-        ApplicationGame applicationGame = new ApplicationGame();
+        RpsGame applicationGame = new RpsGame();
 
         applicationGame.playGame();
     }
