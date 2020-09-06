@@ -7,7 +7,6 @@ import com.kodilla.rps.enumgame.RoundResult;
 
 public interface GameLogic {
 
-
     RoundResult selectWinner(Artefact playerArtefact, Artefact computerArtefact);
 
     GameResult updatePointsAndGetGameResult(RoundResult wins);

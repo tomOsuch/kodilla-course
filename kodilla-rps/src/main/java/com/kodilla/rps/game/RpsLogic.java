@@ -45,12 +45,9 @@ public class RpsLogic implements GameLogic {
 
     @Override
     public GameResult updatePointsAndGetGameResult(RoundResult wins) {
-
-
-        if (wins == RoundResult.PLAYER_WINS) {
-            playerResult++;
-        } else if (wins == RoundResult.COMPUTER_WINS) {
-            computerResult++;
+        switch (wins){
+            case PLAYER_WINS -> playerResult++;
+            case COMPUTER_WINS -> computerResult++;
         }
         if (playerResult == gameSettings.getWinsCount()) return GameResult.PLAYER_WINS;
         else if (computerResult == gameSettings.getWinsCount()) return GameResult.COMPUTER_WINS;

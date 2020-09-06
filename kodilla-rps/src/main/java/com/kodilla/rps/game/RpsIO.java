@@ -22,46 +22,46 @@ public class RpsIO implements GameIO {
         return new GameSettings(playerName, gameCount);
     }
 
+    @Override
     public Artefact promptUserForArtefact() {
         System.out.println("Podaj swój wybór : 1 - kamień, 2 - papier, 3 - nożyce");
         int selection = scanner.nextInt();
         return selectionOfArtefact(selection);
     }
 
+    @Override
     public void showPlayerAndComputerSelection(Artefact playerArtefact, Artefact computerArtefact) {
         System.out.println("Twój wybór: " + playerArtefact + "; Komputer: " + computerArtefact);
     }
 
     @Override
     public void showRoundResult(RoundResult result) {
-        if (result == RoundResult.PLAYER_WINS) {
-            System.out.println("Wygrałeś rozgrywkę");
-        } else if (result == RoundResult.COMPUTER_WINS) {
-            System.out.println("Komputer wygrał rozgrywkę");
-        } else {
-            System.out.println("Remis");
-        }
+        System.out.println(
+                switch (result) {
+                    case PLAYER_WINS -> "Wygrałeś rozgrywkę";
+                    case COMPUTER_WINS -> "Komputer wygrał rozgrywkę";
+                    case DRAW -> "Remis";
+                }
+        );
     }
 
     @Override
     public void showGameResult(GameResult gameResult) {
-        if (gameResult == GameResult.PLAYER_WINS){
-            System.out.println("------------- BRAWO! Wygrałeś -------------");
-        } else {
-            System.out.println("Wygrał komputer");
-        }
+        System.out.println(
+                switch (gameResult) {
+                    case PLAYER_WINS -> "------------- BRAWO! Wygrałeś -------------";
+                    case COMPUTER_WINS -> "Komputer wygrał";
+                    case NO_RESULT -> "Brak zwycięzcy :(";
+                }
+        );
     }
 
     private Artefact selectionOfArtefact(int selection) {
-        switch (selection) {
-            case 1:
-                return Artefact.ROCK;
-            case 2:
-                return Artefact.PAPER;
-            case 3:
-                return Artefact.SCISSORS;
-            default:
-                return null;
-        }
+        return switch (selection) {
+            case 1 -> Artefact.ROCK;
+            case 2 -> Artefact.PAPER;
+            case 3 -> Artefact.SCISSORS;
+            default -> null;
+        };
     }
 }
