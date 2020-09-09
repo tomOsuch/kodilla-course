@@ -2,8 +2,8 @@ package com.kodilla.rps.model;
 
 public class GameSettings {
 
-    private String username;
-    private int winsCount;
+    private final String username;
+    private final int winsCount;
 
 
     public GameSettings(String username, int winsCount) {
@@ -11,12 +11,7 @@ public class GameSettings {
         this.winsCount = winsCount;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
     public int getWinsCount() {
         return winsCount;
     }
-
 }

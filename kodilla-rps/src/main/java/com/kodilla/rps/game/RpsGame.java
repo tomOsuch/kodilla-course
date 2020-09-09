@@ -9,7 +9,6 @@ public class RpsGame {
 
     private final RpsIO rpsIO = new RpsIO();
 
-
     public void playGame() {
         final GameSettings gameSettings = rpsIO.promptUserForSettings();
         RpsLogic rpsLogic = new RpsLogic(gameSettings);
@@ -24,8 +23,4 @@ public class RpsGame {
         } while ((gameResult = rpsLogic.updatePointsAndGetGameResult(roundResult)) == GameResult.NO_RESULT);
         rpsIO.showGameResult(gameResult);
     }
-
-
-
-
 }

@@ -10,19 +10,16 @@ import java.util.*;
 public class RpsLogic implements GameLogic {
 
     private final GameSettings gameSettings;
-
-
-
     private int computerResult = 0;
     private int playerResult = 0;
     private Random random = new Random();
 
     private static final List<Artefact> artefacts = List.of(Artefact.PAPER, Artefact.ROCK, Artefact.SCISSORS);
 
-    static Map<Artefact, Artefact> artefactMapWins;
+    private static final Map<Artefact, Artefact> artefactWinsWith;
 
     static {
-        artefactMapWins = Map.of(Artefact.PAPER, Artefact.ROCK,
+        artefactWinsWith = Map.of(Artefact.PAPER, Artefact.ROCK,
                 Artefact.ROCK, Artefact.SCISSORS,
                 Artefact.SCISSORS, Artefact.PAPER
         );
@@ -34,9 +31,9 @@ public class RpsLogic implements GameLogic {
 
     @Override
     public RoundResult selectWinner(Artefact playerArtefact, Artefact computerArtefact) {
-        if (computerArtefact.equals(artefactMapWins.get(playerArtefact))) {
+        if (computerArtefact.equals(artefactWinsWith.get(playerArtefact))) {
             return RoundResult.PLAYER_WINS;
-        } else if (playerArtefact.equals(artefactMapWins.get(computerArtefact))) {
+        } else if (playerArtefact.equals(artefactWinsWith.get(computerArtefact))) {
             return RoundResult.COMPUTER_WINS;
         } else {
             return RoundResult.DRAW;
@@ -44,8 +41,8 @@ public class RpsLogic implements GameLogic {
     }
 
     @Override
-    public GameResult updatePointsAndGetGameResult(RoundResult wins) {
-        switch (wins){
+    public GameResult updatePointsAndGetGameResult(RoundResult roundResult) {
+        switch (roundResult) {
             case PLAYER_WINS -> playerResult++;
             case COMPUTER_WINS -> computerResult++;
         }
@@ -56,8 +53,6 @@ public class RpsLogic implements GameLogic {
 
     @Override
     public Artefact computerSelectionOfArtefact() {
-        return artefacts.get(random.nextInt(3));
+        return artefacts.get(random.nextInt(artefacts.size()));
     }
-
-
 }
