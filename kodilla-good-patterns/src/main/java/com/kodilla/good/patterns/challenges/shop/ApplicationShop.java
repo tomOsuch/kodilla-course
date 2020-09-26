@@ -7,8 +7,8 @@ public class ApplicationShop {
         OrderRequestRetriever orderRequestRetriever = new OrderRequestRetriever();
         OrderRequest orderRequest = orderRequestRetriever.retrieve();
 
-        ProductOrderService productOrderService = new ProductOrderService(
+        OrderProcessor orderProcessor = new OrderProcessor(
                 new MailService(), new ComputerOrderService(), new ComputerOrderRepository());
-        productOrderService.process(orderRequest);
+        orderProcessor.process(orderRequest);
     }
 }
