@@ -8,11 +8,13 @@ public class OrderRequest {
     private final User user;
     private final BigDecimal price;
     private final LocalDateTime orderDate;
+    private final String product;
 
-    public OrderRequest(User user, BigDecimal price, LocalDateTime orderDate) {
+    public OrderRequest(User user, BigDecimal price, LocalDateTime orderDate, String product) {
         this.user = user;
         this.price = price;
         this.orderDate = orderDate;
+        this.product = product;
     }
 
     public User getUser() {
@@ -25,5 +27,9 @@ public class OrderRequest {
 
     public LocalDateTime getOrderDate() {
         return orderDate;
+    }
+
+    public String getProduct() {
+        return product;
     }
 }

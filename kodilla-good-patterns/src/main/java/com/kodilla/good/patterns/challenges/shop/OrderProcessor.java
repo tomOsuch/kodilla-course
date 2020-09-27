@@ -12,13 +12,15 @@ public class OrderProcessor {
         this.orderRepository = orderRepository;
     }
 
-    public void process(OrderRequest orderRequest) {
+    public OrderDto process(OrderRequest orderRequest) {
         boolean isOrder = orderService.order(orderRequest.getUser(), orderRequest.getPrice(), orderRequest.getOrderDate());
-
+        OrderDto orderDto = null;
         if (isOrder) {
-            informationService.sendmailToUser(orderRequest.getUser());
-            orderRepository.createOrder(orderRequest.getUser(), orderRequest.getPrice(), orderRequest.getOrderDate());
-            new OrderDto(orderRequest.getUser(), orderRequest.getPrice(), orderRequest.getOrderDate());
+            informationService.sendNotification(orderRequest.getUser());
+            orderRepository.createOrder(orderRequest.getUser(), orderRequest.getPrice(), orderRequest.getOrderDate(), orderRequest.getProduct());
+            return new OrderDto(orderRequest.getUser(), orderRequest.getPrice(), orderRequest.getOrderDate(), OrderStatus.ORDERED);
+        } else {
+            return new OrderDto(orderRequest.getUser(), orderRequest.getPrice(), orderRequest.getOrderDate(), OrderStatus.CANCELLED);
         }
     }
 }
