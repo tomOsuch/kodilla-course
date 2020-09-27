@@ -1,4 +1,4 @@
-package com.kodilla.good.patterns.challenges.shop;
+package com.kodilla.good.patterns.challenges.shop.components.model;
 
 public class User {
 

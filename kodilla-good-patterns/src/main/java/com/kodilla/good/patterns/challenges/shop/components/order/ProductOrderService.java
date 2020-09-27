@@ -1,4 +1,6 @@
-package com.kodilla.good.patterns.challenges.shop;
+package com.kodilla.good.patterns.challenges.shop.components.order;
+
+import com.kodilla.good.patterns.challenges.shop.components.model.User;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
