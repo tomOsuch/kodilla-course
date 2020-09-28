@@ -1,4 +1,6 @@
-package com.kodilla.good.patterns.food2door;
+package com.kodilla.good.patterns.food2door.components.order;
+
+import com.kodilla.good.patterns.food2door.components.service.InformationService;
 
 public class OrderProcessor {
 
