@@ -5,9 +5,9 @@ import com.kodilla.good.patterns.challenges.shop.components.model.User;
 
 public class OrderDto {
 
-    public User user;
-    public Product product;
-    public OrderStatus orderStatus;
+    private final User user;
+    private final Product product;
+    private final OrderStatus orderStatus;
 
     public OrderDto(User user, Product product, OrderStatus orderStatus) {
         this.user = user;

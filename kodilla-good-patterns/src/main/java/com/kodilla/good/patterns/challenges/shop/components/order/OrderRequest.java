@@ -12,17 +12,11 @@ public class OrderRequest {
     private final User user;
     private final LocalDateTime orderDate;
     private final Product product;
-    private static final List<Product> products;
 
-    static {
-      products = List.of(new Product("Komputer", new BigDecimal("182.5")),
-              new Product("Ładowarka", new BigDecimal("15.99")));
-    }
-
-    public OrderRequest(User user, LocalDateTime orderDate, int index) {
+    public OrderRequest(User user, LocalDateTime orderDate, Product product) {
         this.user = user;
         this.orderDate = orderDate;
-        product = products.get(index);
+        this.product = product;
     }
 
     public User getUser() {
@@ -31,10 +25,6 @@ public class OrderRequest {
 
     public LocalDateTime getOrderDate() {
         return orderDate;
-    }
-
-    public List<Product> getProducts() {
-        return products;
     }
 
     public Product getProduct() {
