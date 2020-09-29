@@ -4,22 +4,18 @@ import com.kodilla.good.patterns.food2door.components.model.Product;
 import com.kodilla.good.patterns.food2door.components.model.Provider;
 import com.kodilla.good.patterns.food2door.components.model.User;
 
-import java.time.LocalDateTime;
+public class OrderDto {
 
-public class OrderRequest {
+    private final User user;
+    private final Provider provider;
+    private final Product product;
+    private final OrderStatus orderStatus;
 
-    public User user;
-    public Provider provider;
-    public Product product;
-    public LocalDateTime orderDate;
-
-
-    public OrderRequest(User user, Provider provider, Product product, LocalDateTime orderDate) {
+    public OrderDto(User user, Provider provider, Product product, OrderStatus orderStatus) {
         this.user = user;
         this.provider = provider;
         this.product = product;
-        this.orderDate = orderDate;
-
+        this.orderStatus = orderStatus;
     }
 
     public User getUser() {
@@ -34,7 +30,7 @@ public class OrderRequest {
         return product;
     }
 
-    public LocalDateTime getOrderDate() {
-        return orderDate;
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
     }
 }

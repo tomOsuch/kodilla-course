@@ -6,6 +6,9 @@ import com.kodilla.good.patterns.food2door.components.model.User;
 
 import java.time.LocalDateTime;
 
-public interface OrderRepository {
-    void createOrder(User user, Provider provider, Product product, double countProduct, LocalDateTime orderDate);
+public class ProviderOrderService implements OrderService {
+    @Override
+    public boolean order(User user, Provider provider, Product product, LocalDateTime orderDate) {
+        return true;
+    }
 }
