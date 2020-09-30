@@ -1,20 +1,26 @@
 package com.kodilla.good.patterns.food2door.components.order;
 
+
 import com.kodilla.good.patterns.food2door.components.model.Product;
-import com.kodilla.good.patterns.food2door.components.model.Provider;
 import com.kodilla.good.patterns.food2door.components.model.User;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Map;
 
 public class OrderDto {
 
     private final User user;
-    private final Provider provider;
-    private final Product product;
+    private final Map<Product, Integer> products;
+    private final LocalDateTime orderDate;
+    private final BigDecimal price;
     private final OrderStatus orderStatus;
 
-    public OrderDto(User user, Provider provider, Product product, OrderStatus orderStatus) {
+    public OrderDto(User user, Map<Product, Integer> products, LocalDateTime orderDate, BigDecimal price, OrderStatus orderStatus) {
         this.user = user;
-        this.provider = provider;
-        this.product = product;
+        this.products = products;
+        this.orderDate = orderDate;
+        this.price = price;
         this.orderStatus = orderStatus;
     }
 
@@ -22,12 +28,16 @@ public class OrderDto {
         return user;
     }
 
-    public Provider getProvider() {
-        return provider;
+    public Map<Product, Integer> getProducts() {
+        return products;
     }
 
-    public Product getProduct() {
-        return product;
+    public LocalDateTime getOrderDate() {
+        return orderDate;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
     }
 
     public OrderStatus getOrderStatus() {

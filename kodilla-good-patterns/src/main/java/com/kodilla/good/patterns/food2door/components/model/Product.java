@@ -1,22 +1,22 @@
 package com.kodilla.good.patterns.food2door.components.model;
 
-import java.util.List;
+import com.kodilla.good.patterns.food2door.components.model.provider.Provider;
 
 public class Product {
 
     private final String name;
-    private final double count;
+    private final Provider provider;
 
-    public Product(String name, double count) {
+    public Product(String name, Provider provider) {
         this.name = name;
-        this.count = count;
+        this.provider = provider;
     }
 
     public String getName() {
         return name;
     }
 
-    public double getCount() {
-        return count;
+    public Provider getProvider() {
+        return provider;
     }
 }

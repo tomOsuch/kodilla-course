@@ -1,7 +1,10 @@
 package com.kodilla.good.patterns.food2door.components.order;
 
-import com.kodilla.good.patterns.food2door.components.model.Provider;
+import com.kodilla.good.patterns.food2door.components.model.Product;
+import com.kodilla.good.patterns.food2door.components.model.provider.Provider;
 import com.kodilla.good.patterns.food2door.components.service.InformationService;
+
+import java.util.stream.Collectors;
 
 public class OrderProcessor {
 
@@ -16,25 +19,24 @@ public class OrderProcessor {
     }
 
     public OrderDto process(OrderRequest orderRequest) {
-        boolean isOrderSuccessful = orderService.order(orderRequest.getUser(), orderRequest.getProvider(), orderRequest.getProduct(), orderRequest.getOrderDate());
+        boolean isOrderSuccessfulProvider = orderRequest.getProducts().keySet().stream()
+                .map(Product::getProvider)
+                .map(Provider::process)
+                .collect(Collectors.toList())
+                .iterator().next();
+        boolean isOrderSuccessful = orderService.order(orderRequest.getUser(), orderRequest.getProducts(), orderRequest.getOrderDate());
 
-        if (isOrderSuccessful) {
-            if (orderRequest.getProvider().getName() == "ExtraFoodShop") {
-                informationService.sendMessageUser(orderRequest.getUser(), orderRequest.getProduct());
-                orderRepository.createOrder(orderRequest.getUser(),orderRequest.getProvider(), orderRequest.getProduct(), orderRequest.product.getCount(), orderRequest.getOrderDate());
-            } else if (orderRequest.getProvider().getName() == "HealthyShop") {
-                orderRepository.createOrder(orderRequest.getUser(),orderRequest.getProvider(), orderRequest.getProduct(), orderRequest.product.getCount(), orderRequest.getOrderDate());
-                informationService.sendMessageAcceptOrder(orderRequest.getUser(), orderRequest.getProvider(), orderRequest.getProduct());
-            } else {
-                informationService.sendMessageUser(orderRequest.getUser(), orderRequest.getProduct());
-                informationService.sendMessageAcceptOrder(orderRequest.getUser(), orderRequest.getProvider(), orderRequest.getProduct());
-                orderRepository.createOrder(orderRequest.getUser(),orderRequest.getProvider(), orderRequest.getProduct(), orderRequest.product.getCount(), orderRequest.getOrderDate());
-            }
-
-            return new OrderDto(orderRequest.getUser(), orderRequest.getProvider(), orderRequest.getProduct(), OrderStatus.ORDERED);
+        if (isOrderSuccessfulProvider == isOrderSuccessful) {
+            informationService.sendMessageUser(orderRequest.getUser());
+            orderRepository.createOrder(orderRequest.getUser(), orderRequest.getProducts(), orderRequest.getOrderDate(), orderRequest.getPrice());
+            return new OrderDto(orderRequest.getUser(), orderRequest.getProducts(), orderRequest.getOrderDate(), orderRequest.getPrice(), OrderStatus.ORDERED);
         } else {
-            return new OrderDto(orderRequest.getUser(), orderRequest.getProvider(), orderRequest.getProduct(), OrderStatus.CANCELLED);
+            System.out.println("Wyjątek");
+            return new OrderDto(orderRequest.getUser(), orderRequest.getProducts(), orderRequest.getOrderDate(), orderRequest.getPrice(), OrderStatus.CANCELLED);
         }
+
+
+
     }
 
 }

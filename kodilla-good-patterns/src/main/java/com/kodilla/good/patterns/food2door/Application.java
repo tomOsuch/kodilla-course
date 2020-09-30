@@ -1,6 +1,5 @@
 package com.kodilla.good.patterns.food2door;
 
-import com.kodilla.good.patterns.food2door.components.model.Provider;
 import com.kodilla.good.patterns.food2door.components.order.*;
 import com.kodilla.good.patterns.food2door.components.service.MessageService;
 
