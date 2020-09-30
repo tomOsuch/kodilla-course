@@ -1,10 +1,6 @@
 package com.kodilla.good.patterns.food2door.components.order;
 
-import com.kodilla.good.patterns.food2door.components.model.Product;
-import com.kodilla.good.patterns.food2door.components.model.provider.Provider;
 import com.kodilla.good.patterns.food2door.components.service.InformationService;
-
-import java.util.stream.Collectors;
 
 public class OrderProcessor {
 
@@ -19,24 +15,17 @@ public class OrderProcessor {
     }
 
     public OrderDto process(OrderRequest orderRequest) {
-        boolean isOrderSuccessfulProvider = orderRequest.getProducts().keySet().stream()
-                .map(Product::getProvider)
-                .map(Provider::process)
-                .collect(Collectors.toList())
-                .iterator().next();
-        boolean isOrderSuccessful = orderService.order(orderRequest.getUser(), orderRequest.getProducts(), orderRequest.getOrderDate());
+        boolean isOrderSuccessfulProvider = orderService.order(orderRequest.getProducts());
 
-        if (isOrderSuccessfulProvider == isOrderSuccessful) {
-            informationService.sendMessageUser(orderRequest.getUser());
-            orderRepository.createOrder(orderRequest.getUser(), orderRequest.getProducts(), orderRequest.getOrderDate(), orderRequest.getPrice());
-            return new OrderDto(orderRequest.getUser(), orderRequest.getProducts(), orderRequest.getOrderDate(), orderRequest.getPrice(), OrderStatus.ORDERED);
-        } else {
-            System.out.println("Wyjątek");
+        try {
+            if (isOrderSuccessfulProvider){
+                informationService.sendMessageOrderSuccessToUser(orderRequest.getUser());
+                orderRepository.createOrder(orderRequest.getUser(), orderRequest.getProducts(), orderRequest.getOrderDate(), orderRequest.getPrice());
+                return new OrderDto(orderRequest.getUser(), orderRequest.getProducts(), orderRequest.getOrderDate(), orderRequest.getPrice(), OrderStatus.ORDERED);
+            } throw new Exception();
+        } catch (Exception e) {
+            informationService.sendMessageOrderFailToUser(orderRequest.getUser());
             return new OrderDto(orderRequest.getUser(), orderRequest.getProducts(), orderRequest.getOrderDate(), orderRequest.getPrice(), OrderStatus.CANCELLED);
         }
-
-
-
     }
-
 }

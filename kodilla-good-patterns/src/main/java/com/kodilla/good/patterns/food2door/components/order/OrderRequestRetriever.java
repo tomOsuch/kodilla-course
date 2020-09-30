@@ -11,15 +11,15 @@ import java.util.Map;
 public class OrderRequestRetriever {
 
     private static final Map<Product, Integer> cardProducts;
-    private static final ExtraFoodShop extraFoodShop = new ExtraFoodShop(ProviderName.ExtraFoodShop);
-    private static final HealthyShop healthyShop = new HealthyShop(ProviderName.HealthyShop);
-    private static final GlutenFreeShop glutenFreeShop = new GlutenFreeShop(ProviderName.GlutenFreeShop);
+    private static final ExtraFoodShop extraFoodShop = new ExtraFoodShop("ExtraFoodShop");
+    private static final HealthyShop healthyShop = new HealthyShop("HealthyShop");
+    private static final GlutenFreeShop glutenFreeShop = new GlutenFreeShop("GlutenFreeShop");
 
     static {
         cardProducts = Map.of(
-                new Product("Chleb bez glutenowy", glutenFreeShop), 2,
-                new Product("Mleko sojowe", healthyShop), 1,
-                new Product("Krewetki", extraFoodShop), 3
+                new Product("Chleb bez glutenowy", glutenFreeShop, new BigDecimal("5.99")), 2,
+                new Product("Mleko sojowe", healthyShop, new BigDecimal("4.99")), 1,
+                new Product("Krewetki", extraFoodShop, new BigDecimal("10.50")), 3
         );
     }
 

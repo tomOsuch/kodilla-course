@@ -10,7 +10,7 @@ public class Application {
         OrderRequest orderRequest = orderRequestRetriever.retriever();
 
         OrderProcessor orderProcessor = new OrderProcessor(
-                new MessageService(), new ProviderOrderService(), new ProviderOrderRepository()
+                new MessageService(), new OrderServiceImpl(), new OrderRepositoryImpl()
         );
         orderProcessor.process(orderRequest);
     }

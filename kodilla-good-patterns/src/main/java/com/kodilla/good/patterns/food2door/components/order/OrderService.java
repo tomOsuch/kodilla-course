@@ -8,5 +8,5 @@ import java.time.LocalDateTime;
 import java.util.Map;
 
 public interface OrderService {
-    boolean order(User user, Map<Product, Integer> products, LocalDateTime orderDate);
+    boolean order(Map<Product, Integer> products);
 }

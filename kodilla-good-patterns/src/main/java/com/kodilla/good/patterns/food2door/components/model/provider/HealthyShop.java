@@ -2,13 +2,13 @@ package com.kodilla.good.patterns.food2door.components.model.provider;
 
 public class HealthyShop implements Provider {
 
-    private final ProviderName providerName;
+    private final String providerName;
 
-    public HealthyShop(ProviderName providerName) {
+    public HealthyShop(String providerName) {
         this.providerName = providerName;
     }
 
-    public ProviderName getProviderName() {
+    public String getProviderName() {
         return providerName;
     }
 
