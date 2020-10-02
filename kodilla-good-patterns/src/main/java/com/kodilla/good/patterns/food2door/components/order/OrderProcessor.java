@@ -14,16 +14,13 @@ public class OrderProcessor {
         this.orderRepository = orderRepository;
     }
 
-    public OrderDto process(OrderRequest orderRequest) {
-        boolean isOrderSuccessfulProvider = orderService.order(orderRequest.getProducts());
-
+    public OrderDto process(OrderRequest orderRequest) throws ExceptionOrder {
         try {
-            if (isOrderSuccessfulProvider){
-                informationService.sendMessageOrderSuccessToUser(orderRequest.getUser());
-                orderRepository.createOrder(orderRequest.getUser(), orderRequest.getProducts(), orderRequest.getOrderDate(), orderRequest.getPrice());
-                return new OrderDto(orderRequest.getUser(), orderRequest.getProducts(), orderRequest.getOrderDate(), orderRequest.getPrice(), OrderStatus.ORDERED);
-            } throw new Exception();
-        } catch (Exception e) {
+            orderService.order(orderRequest.getProducts());
+            informationService.sendMessageOrderSuccessToUser(orderRequest.getUser());
+            orderRepository.createOrder(orderRequest.getUser(), orderRequest.getProducts(), orderRequest.getOrderDate(), orderRequest.getPrice());
+            return new OrderDto(orderRequest.getUser(), orderRequest.getProducts(), orderRequest.getOrderDate(), orderRequest.getPrice(), OrderStatus.ORDERED);
+        } catch (ExceptionOrder e) {
             informationService.sendMessageOrderFailToUser(orderRequest.getUser());
             return new OrderDto(orderRequest.getUser(), orderRequest.getProducts(), orderRequest.getOrderDate(), orderRequest.getPrice(), OrderStatus.CANCELLED);
         }

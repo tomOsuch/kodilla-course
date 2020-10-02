@@ -1,5 +1,9 @@
 package com.kodilla.good.patterns.food2door.components.model.provider;
 
+import com.kodilla.good.patterns.food2door.components.model.Product;
+
+import java.util.Map;
+
 public class ExtraFoodShop implements Provider {
 
     private final String providerName;
@@ -13,7 +17,7 @@ public class ExtraFoodShop implements Provider {
     }
 
     @Override
-    public boolean process() {
+    public boolean process(Map<Product, Integer> products) {
         return false;
     }
 }
