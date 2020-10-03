@@ -14,13 +14,13 @@ public class OrderProcessor {
         this.orderRepository = orderRepository;
     }
 
-    public OrderDto process(OrderRequest orderRequest) throws ExceptionOrder {
+    public OrderDto process(OrderRequest orderRequest) throws OrderException {
         try {
             orderService.order(orderRequest.getProducts());
             informationService.sendMessageOrderSuccessToUser(orderRequest.getUser());
             orderRepository.createOrder(orderRequest.getUser(), orderRequest.getProducts(), orderRequest.getOrderDate(), orderRequest.getPrice());
             return new OrderDto(orderRequest.getUser(), orderRequest.getProducts(), orderRequest.getOrderDate(), orderRequest.getPrice(), OrderStatus.ORDERED);
-        } catch (ExceptionOrder e) {
+        } catch (OrderException e) {
             informationService.sendMessageOrderFailToUser(orderRequest.getUser());
             return new OrderDto(orderRequest.getUser(), orderRequest.getProducts(), orderRequest.getOrderDate(), orderRequest.getPrice(), OrderStatus.CANCELLED);
         }
