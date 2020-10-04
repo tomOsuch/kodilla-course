@@ -11,7 +11,11 @@ public class TaskList {
         tasks = new ArrayList<>();
     }
 
-    public boolean addTask(String task) {
-        return tasks.add(task);
+    public TaskList(List<String> tasks) {
+        this.tasks = tasks;
+    }
+
+    public List<String> getTasks() {
+        return tasks;
     }
 }

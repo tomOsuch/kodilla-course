@@ -1,34 +1,42 @@
 package com.kodilla.spring.portfolio;
 
-import java.util.List;
-
 public class Board {
 
-    private List<TaskList> toDoList;
-    private List<TaskList> inProgressList;
-    private List<TaskList> doneList;
+    private TaskList toDoList;
+    private TaskList inProgressList;
+    private TaskList doneList;
 
-    public List<TaskList> getToDoList() {
+    public Board(TaskList toDoList, TaskList inProgressList, TaskList doneList) {
+        this.toDoList = toDoList;
+        this.inProgressList = inProgressList;
+        this.doneList = doneList;
+    }
+
+    public TaskList getToDoList() {
         return toDoList;
     }
 
-    public List<TaskList> getInProgressList() {
+    public TaskList getInProgressList() {
         return inProgressList;
     }
 
-    public List<TaskList> getDoneList() {
+    public TaskList getDoneList() {
         return doneList;
     }
 
-    public void setToDoList(List<TaskList> toDoList) {
+    public void setToDoList(TaskList toDoList) {
         this.toDoList = toDoList;
     }
 
-    public void setInProgressList(List<TaskList> inProgressList) {
+    public void setInProgressList(TaskList inProgressList) {
         this.inProgressList = inProgressList;
     }
 
-    public void setDoneList(List<TaskList> doneList) {
+    public void setDoneList(TaskList doneList) {
         this.doneList = doneList;
+    }
+
+    public void getAllBoard() {
+        System.out.println("Board: " + getToDoList() + getInProgressList() + getDoneList());
     }
 }
