@@ -7,4 +7,5 @@ import java.util.Map;
 public interface Provider {
 
     boolean process(Map<Product, Integer> products);
+    String getProviderName();
 }

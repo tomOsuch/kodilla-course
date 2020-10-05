@@ -20,7 +20,7 @@ public class OrderRequestRetriever {
                 new Product("Chleb bez glutenowy", glutenFreeShop, new BigDecimal("5.99")), 2,
                 new Product("Mleko sojowe", healthyShop, new BigDecimal("4.99")), 1,
                 new Product("Krewetki", healthyShop, new BigDecimal("10.50")), 3,
-                new Product("Kalmary", extraFoodShop, new BigDecimal("10.50")), 3
+                new Product("Kalmary", glutenFreeShop, new BigDecimal("10.50")), 3
         );
     }
 

@@ -12,6 +12,7 @@ public class HealthyShop implements Provider {
         this.providerName = providerName;
     }
 
+    @Override
     public String getProviderName() {
         return providerName;
     }

@@ -12,6 +12,7 @@ public class ExtraFoodShop implements Provider {
         this.providerName = providerName;
     }
 
+    @Override
     public String getProviderName() {
         return providerName;
     }
