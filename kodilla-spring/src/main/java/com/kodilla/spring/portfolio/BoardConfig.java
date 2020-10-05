@@ -11,20 +11,9 @@ import java.util.List;
 @Configuration
 public class BoardConfig {
 
-    @Autowired
-    @Qualifier("todo")
-    TaskList toDoList;
-
-    @Autowired
-    @Qualifier("inProg")
-    TaskList inProgList;
-
-    @Autowired
-    @Qualifier("done")
-    TaskList doneList;
-
     @Bean
-    public Board getBoard() {
+    public Board getBoard(@Qualifier("todo") TaskList toDoList, @Qualifier("inProg") TaskList inProgList,
+        @Qualifier("done") TaskList doneList) {
         return new Board(toDoList, inProgList, doneList);
     }
 
