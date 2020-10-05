@@ -12,9 +12,8 @@ import java.util.List;
 public class BoardConfig {
 
     @Bean
-    public Board getBoard(@Qualifier("todo") TaskList toDoList, @Qualifier("inProg") TaskList inProgList,
-        @Qualifier("done") TaskList doneList) {
-        return new Board(toDoList, inProgList, doneList);
+    public Board getBoard(TaskList todo, TaskList inProg, TaskList done) {
+        return new Board(todo, inProg, done);
     }
 
     @Bean(name = "todo")
