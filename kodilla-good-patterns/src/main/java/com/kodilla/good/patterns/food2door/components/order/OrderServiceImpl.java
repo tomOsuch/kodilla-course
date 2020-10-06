@@ -4,8 +4,7 @@ import com.kodilla.good.patterns.food2door.components.model.Product;
 import com.kodilla.good.patterns.food2door.components.model.provider.Provider;
 
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
@@ -14,37 +13,45 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void order(Map<Product, Integer> products){
 
-        filterByProvider(products);
+        boolean overallResult = groupByProvider(products).entrySet().stream()
+                .map(providerProducts -> providerProducts.getKey().process(providerProducts.getValue()))
+                //.reduce((r1, r2) -> r1 && r2)
+                .allMatch(result -> result.equals(true));
 
-
-        if (!products.entrySet().stream()
-                .collect(Collectors.toList()).stream()
-                .map(a -> a.getKey().getProvider().process(products))
-                .allMatch(process -> process.equals(true))) throw new OrderException();
+        if (!overallResult) throw new OrderException();
 
     }
 
-    private List<Map<Product, Integer>> groupByProvider(Map<Product, Integer> productOrder) {
-
-        return null;
-    }
 
     private void filterByProvider(Map<Product, Integer> productList) {
-        List<String> a = productList.keySet().stream()
+       // List<Map<Product, Integer>> ordersToProviderList = new ArrayList<>();
+        Set<String> providerDuplicateList = productList.keySet().stream()
                 .map(Product::getProvider)
                 .map(Provider::getProviderName)
-                .collect(Collectors.toList());
-        List<String> providers = removeDuplicationToList(a);
+                .collect(Collectors.toSet());
+        //List<String> providers = removeDuplicationToList(providerDuplicateList);
+
+        //Map<Product,Integer> map = creatMapIteration(productList, providers);
 
 
-        Map<Product, Integer> prod = productList.entrySet().stream()
-                .filter(integer -> integer.getKey().getProvider().getProviderName().equals(providers.get(0)))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
-        prod.keySet().stream()
-                .map(Product::getName)
-                .collect(Collectors.toList())
-                .forEach(System.out::println);
+    }
+
+    private void addProductToProvider(Map<Provider, Map<Product, Integer>> order, Product prod, int count) {
+        Provider provider = prod.getProvider();
+        if (order.containsKey(provider)) {
+            order.get(provider).put(prod, count);
+        } else {
+            order.put(provider, new HashMap<>(Map.of(prod, count)));
+        }
+    }
+
+    private Map<Provider, Map<Product, Integer>> groupByProvider(Map<Product, Integer> order) {
+        Map<Provider, Map<Product, Integer>> orderGroupedByProvider = new HashMap<>();
+        for (Map.Entry<Product, Integer> product : order.entrySet()) {
+            addProductToProvider(orderGroupedByProvider, product.getKey(), product.getValue());
+        }
+        return orderGroupedByProvider;
     }
 
     private List<String> removeDuplicationToList(List<String> names) {
@@ -56,5 +63,25 @@ public class OrderServiceImpl implements OrderService {
             }
         }
         return names;
+    }
+
+    private Map<Product, Integer> creatMapIteration(Map<Product, Integer> prodMap, List<String> providers) {
+        Map<Product, Integer> returnProductMap = null;
+        for (int i = 0; i < providers.size(); i++) {
+            int finalI = i;
+            returnProductMap =  prodMap.entrySet().stream()
+                    .filter(integer -> integer.getKey().getProvider().getProviderName().equals(providers.get(finalI)))
+                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+            prodMap.entrySet().stream()
+                    .filter(integer -> integer.getKey().getProvider().getProviderName().equals(providers.get(finalI)))
+                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)).keySet().stream()
+                    .map(Product::getName)
+                    .collect(Collectors.toList())
+                    .forEach(System.out::println);
+            System.out.println("----------------");
+
+        }
+        return returnProductMap;
     }
 }
