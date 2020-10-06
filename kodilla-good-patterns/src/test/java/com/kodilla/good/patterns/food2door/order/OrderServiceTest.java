@@ -7,7 +7,6 @@ import com.kodilla.good.patterns.food2door.components.model.provider.HealthyShop
 import com.kodilla.good.patterns.food2door.components.order.OrderException;
 import com.kodilla.good.patterns.food2door.components.order.OrderService;
 import com.kodilla.good.patterns.food2door.components.order.OrderServiceImpl;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
@@ -15,6 +14,8 @@ import java.math.BigDecimal;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.anyMap;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
 
@@ -33,14 +34,13 @@ public class OrderServiceTest {
     }
 
     @Mock
-    OrderService orderServiceMock;
+    private OrderService orderServiceMock;
 
     @Test
     void testOrder() throws OrderException {
         //Give
         OrderServiceImpl orderService = new OrderServiceImpl();
         Map<Product, Integer> orders = createOrder();
-
         //When
 
         //Then

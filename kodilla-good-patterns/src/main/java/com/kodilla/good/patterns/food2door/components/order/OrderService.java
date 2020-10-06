@@ -9,4 +9,5 @@ import java.util.Map;
 
 public interface OrderService {
     void order(Map<Product, Integer> products);
+
 }
