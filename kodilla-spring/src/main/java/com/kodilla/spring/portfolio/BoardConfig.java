@@ -16,21 +16,21 @@ public class BoardConfig {
         return new Board(todo, inProg, done);
     }
 
-    @Bean(name = "todo")
+    @Bean
     @Scope("prototype")
-    public TaskList createToDoList() {
+    public TaskList todo() {
         return new TaskList();
     }
 
-    @Bean(name = "inProg")
+    @Bean
     @Scope("prototype")
-    public TaskList createInProgList() {
+    public TaskList inProg() {
         return new TaskList();
     }
 
-    @Bean(name = "done")
+    @Bean
     @Scope("prototype")
-    public TaskList createDoneList() {
+    public TaskList done() {
         return new TaskList();
     }
 

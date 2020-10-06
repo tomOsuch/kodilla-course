@@ -8,6 +8,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -19,10 +20,15 @@ public class BoardTestSuite {
         //Given
         ApplicationContext context =
                 new AnnotationConfigApplicationContext(BoardConfig.class);
-        //When & Then
+        //When
         System.out.println("-- Beans list: --");
-        Arrays.stream(context.getBeanDefinitionNames())
-                .forEach(System.out::println);
+        List<String> beanListResult = Arrays.stream(context.getBeanDefinitionNames())
+                .collect(Collectors.toList());
+        //Then
+        Assertions.assertTrue(beanListResult.contains("todo"));
+        Assertions.assertTrue(beanListResult.contains("inProg"));
+        Assertions.assertTrue(beanListResult.contains("done"));
+
     }
 
     @Test
@@ -42,9 +48,6 @@ public class BoardTestSuite {
         assertEquals(toDoResult, "ToDo");
         assertEquals(inProgResult, "inProg");
         assertEquals(doneResult, "done");
-        System.out.println(board.getToDoList().getTasks());
-        System.out.println(board.getInProgressList().getTasks());
-        System.out.println(board.getDoneList().getTasks());
     }
 
 
