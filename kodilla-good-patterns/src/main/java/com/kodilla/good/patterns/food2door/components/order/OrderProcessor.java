@@ -18,11 +18,11 @@ public class OrderProcessor {
         try {
             orderService.order(orderRequest.getProducts());
             informationService.sendMessageOrderSuccessToUser(orderRequest.getUser());
-            orderRepository.createOrder(orderRequest.getUser(), orderRequest.getProducts(), orderRequest.getOrderDate(), orderRequest.getPrice());
-            return new OrderDto(orderRequest.getUser(), orderRequest.getProducts(), orderRequest.getOrderDate(), orderRequest.getPrice(), OrderStatus.ORDERED);
+            orderRepository.createOrder(orderRequest.getUser(), orderRequest.getProducts(), orderRequest.getOrderDate());
+            return new OrderDto(orderRequest.getUser(), orderRequest.getProducts(), orderRequest.getOrderDate(), OrderStatus.ORDERED);
         } catch (OrderException e) {
             informationService.sendMessageOrderFailToUser(orderRequest.getUser());
-            return new OrderDto(orderRequest.getUser(), orderRequest.getProducts(), orderRequest.getOrderDate(), orderRequest.getPrice(), OrderStatus.CANCELLED);
+            return new OrderDto(orderRequest.getUser(), orderRequest.getProducts(), orderRequest.getOrderDate(), OrderStatus.CANCELLED);
         }
     }
 }

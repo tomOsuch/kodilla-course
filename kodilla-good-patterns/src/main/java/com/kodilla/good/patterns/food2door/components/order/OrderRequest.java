@@ -12,13 +12,11 @@ public class OrderRequest {
     public User user;
     public LocalDateTime orderDate;
     public Map<Product, Integer> products;
-    public BigDecimal price;
 
-    public OrderRequest(User user, LocalDateTime orderDate, Map<Product, Integer> products, BigDecimal price) {
+    public OrderRequest(User user, LocalDateTime orderDate, Map<Product, Integer> products) {
         this.user = user;
         this.orderDate = orderDate;
         this.products = products;
-        this.price = price;
     }
 
     public User getUser() {
@@ -33,7 +31,4 @@ public class OrderRequest {
         return products;
     }
 
-    public BigDecimal getPrice() {
-        return price;
-    }
 }

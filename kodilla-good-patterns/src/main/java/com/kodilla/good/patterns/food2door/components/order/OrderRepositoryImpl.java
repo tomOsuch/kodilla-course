@@ -10,7 +10,7 @@ import java.util.Map;
 public class OrderRepositoryImpl implements OrderRepository {
 
     @Override
-    public void createOrder(User user, Map<Product, Integer> products, LocalDateTime orderDate, BigDecimal price) {
+    public void createOrder(User user, Map<Product, Integer> products, LocalDateTime orderDate) {
         System.out.println("Zamówienie zostało utworzone");
     }
 }

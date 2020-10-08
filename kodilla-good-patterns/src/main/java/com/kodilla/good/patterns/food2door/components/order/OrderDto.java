@@ -13,14 +13,12 @@ public class OrderDto {
     private final User user;
     private final Map<Product, Integer> products;
     private final LocalDateTime orderDate;
-    private final BigDecimal price;
     private final OrderStatus orderStatus;
 
-    public OrderDto(User user, Map<Product, Integer> products, LocalDateTime orderDate, BigDecimal price, OrderStatus orderStatus) {
+    public OrderDto(User user, Map<Product, Integer> products, LocalDateTime orderDate, OrderStatus orderStatus) {
         this.user = user;
         this.products = products;
         this.orderDate = orderDate;
-        this.price = price;
         this.orderStatus = orderStatus;
     }
 
@@ -34,10 +32,6 @@ public class OrderDto {
 
     public LocalDateTime getOrderDate() {
         return orderDate;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
     }
 
     public OrderStatus getOrderStatus() {

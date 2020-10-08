@@ -10,24 +10,25 @@ import java.util.Map;
 
 public class OrderRequestRetriever {
 
-    private static final Map<Product, Integer> cardProducts;
+    private static final Map<Product, Integer> cartProduct;
     private static final ExtraFoodShop extraFoodShop = new ExtraFoodShop("ExtraFoodShop");
     private static final HealthyShop healthyShop = new HealthyShop("HealthyShop");
     private static final GlutenFreeShop glutenFreeShop = new GlutenFreeShop("GlutenFreeShop");
 
     static {
-        cardProducts = Map.of(
-                new Product("Chleb bez glutenowy", glutenFreeShop, new BigDecimal("5.99")), 2,
-                new Product("Mleko sojowe", healthyShop, new BigDecimal("4.99")), 1,
-                new Product("Krewetki", healthyShop, new BigDecimal("10.50")), 3,
-                new Product("Kalmary", extraFoodShop, new BigDecimal("10.50")), 3
+        cartProduct = Map.of(
+                new Product("Chleb bez glutenowy", glutenFreeShop), 2,
+                new Product("Mleko sojowe", healthyShop), 1,
+                new Product("Krewetki", healthyShop), 3,
+                new Product("Kalmary", extraFoodShop), 3
         );
     }
 
     public OrderRequest retriever() {
         User user = new User(1, "jkowalski", "1234", "jan.kowalski@test.pl", "Ul. Kwiatowa 12");
         LocalDateTime orderDate = LocalDateTime.of(2020, 9, 12, 12, 0);
-        return new OrderRequest(user, orderDate, cardProducts, new BigDecimal("150"));
+        return new OrderRequest(user, orderDate, cartProduct);
     }
+
 
 }

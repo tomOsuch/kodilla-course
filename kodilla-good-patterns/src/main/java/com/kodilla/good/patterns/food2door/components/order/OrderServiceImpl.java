@@ -17,7 +17,6 @@ public class OrderServiceImpl implements OrderService {
                 .allMatch(result -> result.equals(true));
 
         if (!overallResult) throw new OrderException();
-
     }
 
     private void addProductToProvider(Map<Provider, Map<Product, Integer>> order, Product prod, int count) {

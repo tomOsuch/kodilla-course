@@ -8,5 +8,5 @@ import java.time.LocalDateTime;
 import java.util.Map;
 
 public interface OrderRepository {
-    void createOrder(User user, Map<Product, Integer> products, LocalDateTime orderDate, BigDecimal price);
+    void createOrder(User user, Map<Product, Integer> products, LocalDateTime orderDate);
 }
