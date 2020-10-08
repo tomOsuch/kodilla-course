@@ -2,19 +2,25 @@ package com.kodilla.good.patterns.challenges.flightsearch.components.model;
 
 public class Flight {
 
-    private final String departureAirport;
-    private final String arrivalAirport;
+    private final String numberFlight;
+    private final Airport departureAirport;
+    private final Airport arrivalAirport;
 
-    public Flight(String departureAirport, String arrivalAirport) {
+    public Flight(String numberFlight, Airport departureAirport, Airport arrivalAirport) {
+        this.numberFlight = numberFlight;
         this.departureAirport = departureAirport;
         this.arrivalAirport = arrivalAirport;
     }
 
-    public String getDepartureAirport() {
+    public String getNumberFlight() {
+        return numberFlight;
+    }
+
+    public Airport getDepartureAirport() {
         return departureAirport;
     }
 
-    public String getArrivalAirport() {
+    public Airport getArrivalAirport() {
         return arrivalAirport;
     }
 }
