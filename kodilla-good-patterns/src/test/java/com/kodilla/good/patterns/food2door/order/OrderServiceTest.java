@@ -1,64 +1,63 @@
 package com.kodilla.good.patterns.food2door.order;
 
 import com.kodilla.good.patterns.food2door.components.model.Product;
-import com.kodilla.good.patterns.food2door.components.model.provider.ExtraFoodShop;
-import com.kodilla.good.patterns.food2door.components.model.provider.GlutenFreeShop;
-import com.kodilla.good.patterns.food2door.components.model.provider.HealthyShop;
 import com.kodilla.good.patterns.food2door.components.model.provider.Provider;
 import com.kodilla.good.patterns.food2door.components.order.OrderException;
 import com.kodilla.good.patterns.food2door.components.order.OrderServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 
 public class OrderServiceTest {
 
-    private Map<Product, Integer> createOrderTrue() {
-        Provider healthyShopMock = new HealthyShop("HealthyShop");
-        Provider glutenFreeShopMock = new GlutenFreeShop("GlutenFreeShop");
+    private Map<Product, Integer> createOrder() {
+        Provider firstProviderMock = mock(Provider.class);
+        Provider secondProviderMock = mock(Provider.class);
+        Provider thirdProviderMock = mock(Provider.class);
 
         return Map.of(
-                new Product("Chleb bez glutenowy", glutenFreeShopMock), 2,
-                new Product("Mleko sojowe", healthyShopMock), 1,
-                new Product("Krewetki", healthyShopMock), 3
-        );
-    }
-
-    private Map<Product, Integer> createOrderFalse() {
-        Provider extraFoodShop = new ExtraFoodShop("ExtraFoodShop");
-        Provider healthyShop = new HealthyShop("HealthyShop");
-        Provider glutenFreeShop = new GlutenFreeShop("GlutenFreeShop");
-
-        return Map.of(
-                new Product("Chleb bez glutenowy", glutenFreeShop), 2,
-                new Product("Mleko sojowe", healthyShop), 1,
-                new Product("Krewetki", extraFoodShop), 3
+                new Product("Chleb bez glutenowy", firstProviderMock, new BigDecimal("5.99")), 2,
+                new Product("Mleko sojowe", firstProviderMock, new BigDecimal("4.99")), 1,
+                new Product("Krewetki", secondProviderMock, new BigDecimal("10.50")), 3,
+                new Product("Kalmary", thirdProviderMock, new BigDecimal("10.50")), 3
         );
     }
 
     @Test
-    void testOrderTrue() {
+    void testOrderTrue() throws OrderException {
         //Give
+        Provider firstProviderMock = mock(Provider.class);
+        Provider secondProviderMock = mock(Provider.class);
+        Provider thirdProviderMock = mock(Provider.class);
         OrderServiceImpl orderService = new OrderServiceImpl();
-        Map<Product, Integer> orders = createOrderTrue();
+        when(firstProviderMock.process(createOrder())).thenReturn(true);
+        when(secondProviderMock.process(createOrder())).thenReturn(true);
+        when(thirdProviderMock.process(createOrder())).thenReturn(true);
         //When
 
         //Then
-        Assertions.assertDoesNotThrow(() -> orderService.order(createOrderTrue()));
-
+        Assertions.assertDoesNotThrow(() -> orderService.order(createOrder()));
     }
 
     @Test
     void testOrderFalse() throws OrderException {
+        Provider firstProviderMock = mock(Provider.class);
+        Provider secondProviderMock = mock(Provider.class);
+        Provider thirdProviderMock = mock(Provider.class);
         OrderServiceImpl orderService = new OrderServiceImpl();
-        Map<Product, Integer> orders = createOrderFalse();
+        when(firstProviderMock.process(createOrder())).thenReturn(true);
+        when(secondProviderMock.process(createOrder())).thenReturn(true);
+        when(thirdProviderMock.process(createOrder())).thenReturn(false);
         //When
 
         //Then
-        Assertions.assertThrows(OrderException.class, () -> orderService.order(createOrderFalse()));
+        Assertions.assertThrows(OrderException.class, () -> orderService.order(createOrder()));
     }
 }

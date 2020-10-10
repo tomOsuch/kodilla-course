@@ -8,10 +8,12 @@ public class Product {
 
     private final String name;
     private final Provider provider;
+    private final BigDecimal price;
 
-    public Product(String name, Provider provider) {
+    public Product(String name, Provider provider, BigDecimal price) {
         this.name = name;
         this.provider = provider;
+        this.price = price;
     }
 
     public String getName() {
@@ -20,5 +22,9 @@ public class Product {
 
     public Provider getProvider() {
         return provider;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
     }
 }
