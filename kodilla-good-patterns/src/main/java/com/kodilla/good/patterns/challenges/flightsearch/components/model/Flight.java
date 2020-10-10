@@ -23,4 +23,16 @@ public class Flight {
     public Airport getArrivalAirport() {
         return arrivalAirport;
     }
+
+    @Override
+    public String toString() {
+        return "Flight{" +
+                "FlightNumber: " + getNumberFlight() + "; " +
+                "arrivalAirport=" + arrivalAirport.getName() +
+                '}';
+    }
+
+    public String printArrivalAirport() {
+        return arrivalAirport.getName();
+    }
 }

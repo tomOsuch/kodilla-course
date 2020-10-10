@@ -5,6 +5,6 @@ import com.kodilla.good.patterns.challenges.flightsearch.components.model.Airpor
 public class SearchRepositoryImpl implements SearchRepository {
     @Override
     public void createSearchFlights(Airport departureAirport, Airport arrivalAirport) {
-        System.out.println("Zostały wyszukane wszystkie loty z lotniska: " + departureAirport + " do lotniska: " + arrivalAirport);
+        System.out.println("Zostały wyszukane wszystkie loty z lotniska: " + departureAirport.getName() + " do lotniska: " + arrivalAirport.getName());
     }
 }
