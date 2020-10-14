@@ -7,7 +7,7 @@ import java.util.Set;
 public class Board extends Prototype<Board> {
 
     private String name;
-    private final Set<TasksList> lists = new HashSet<>();
+    private Set<TasksList> lists = new HashSet<>();
 
     public Board(String name) {
         this.name = name;
@@ -36,6 +36,20 @@ public class Board extends Prototype<Board> {
 
     public Board shallowCopy() throws CloneNotSupportedException {
         return super.clone();
+    }
+
+    public Board deepCopy() throws CloneNotSupportedException {
+        Board cloneBoard = super.clone();
+
+        cloneBoard.lists = new HashSet<>();
+        for (TasksList theList : lists) {
+            TasksList clonedList = new TasksList(theList.getName());
+            for (Task task : theList.getTasks()) {
+                clonedList.getTasks().add(task);
+            }
+            cloneBoard.getLists().add(clonedList);
+        }
+        return cloneBoard;
     }
 
     @Override
