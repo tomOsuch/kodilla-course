@@ -35,6 +35,7 @@ public class LibraryTestSuite {
         assertEquals(0, clonedLibrary.getBooks().size());
         assertEquals(clonedLibrary.getBooks(), library.getBooks());
         assertEquals("Płytki Klon Koszykowa", clonedLibrary.getName());
+        assertEquals(clonedLibrary.getBooks().hashCode(), library.getBooks().hashCode());
     }
 
     @Test
@@ -49,5 +50,6 @@ public class LibraryTestSuite {
         assertEquals(2, deepClonedLibrary.getBooks().size());
         assertEquals("Głęboki Klon Koszykowa", deepClonedLibrary.getName());
         assertNotEquals(deepClonedLibrary.getBooks(), library.getBooks());
+        assertNotEquals(deepClonedLibrary.getBooks().hashCode(), library.getBooks().hashCode());
     }
 }
