@@ -1,6 +1,6 @@
 package com.kodilla.patterns.prototype.library;
 
-import org.junit.jupiter.api.BeforeAll;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,37 +15,39 @@ public class LibraryTestSuite {
 
     private static final Library library = new Library("Koszykowa");
 
+    @BeforeEach
+    private void createLibrary() {
+        library.getBooks().add(new Book("Title 1", "Author 1", LocalDate.now()));
+        library.getBooks().add(new Book("Title 2", "Author 2", LocalDate.now()));
+    }
+
 
     @Test
     void testShallowCopy() throws CloneNotSupportedException {
         //Given
-        IntStream.iterate(1, n -> n = n + 1)
-                .limit(10)
-                .forEach(n -> library.getBooks().add(new Book("Title " + n, "Author " + n, LocalDate.now())));
-
         Library clonedLibrary = null;
         clonedLibrary = library.shallowCopy();
         clonedLibrary.setName("Płytki Klon Koszykowa");
         //When
         library.getBooks().removeAll(library.getBooks());
         //Then
+        assertEquals("Koszykowa", library.getName());
+        assertEquals(0, clonedLibrary.getBooks().size());
         assertEquals(clonedLibrary.getBooks(), library.getBooks());
+        assertEquals("Płytki Klon Koszykowa", clonedLibrary.getName());
     }
 
     @Test
     void testDeepCloned() throws CloneNotSupportedException {
         //Given
-        IntStream.iterate(1, n -> n = n + 1)
-                .limit(10)
-                .forEach(n -> library.getBooks().add(new Book("Title " + n, "Author " + n, LocalDate.now())));
-
         Library deepClonedLibrary = null;
         deepClonedLibrary = library.deepCopy();
-        deepClonedLibrary.setName("Głęboki klon Koszykowa");
+        deepClonedLibrary.setName("Głęboki Klon Koszykowa");
         //When
         library.getBooks().removeAll(library.getBooks());
         //Then
-        //assertEquals(10, library.getBooks().size());
+        assertEquals(2, deepClonedLibrary.getBooks().size());
+        assertEquals("Głęboki Klon Koszykowa", deepClonedLibrary.getName());
         assertNotEquals(deepClonedLibrary.getBooks(), library.getBooks());
     }
 }
