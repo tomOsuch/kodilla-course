@@ -9,7 +9,7 @@ public final class TaskFactory {
     public final Task makeTask(final String taskClass) {
         return switch (taskClass) {
             case DRIVING -> new DrivingTask("driving taxi", "Dom", "test");
-            case PAINTING -> new PaintingTask("Painting color", "", "");
+            case PAINTING -> new PaintingTask("Painting color", "Red", "");
             case SHOPPING -> new ShoppingTask("Zakupy", "owoce", 15.9);
             default -> null;
         };
