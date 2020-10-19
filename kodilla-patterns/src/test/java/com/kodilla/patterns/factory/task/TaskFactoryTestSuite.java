@@ -1,18 +1,12 @@
 package com.kodilla.patterns.factory.task;
 
-import com.kodilla.patterns.factory.tasks.Task;
-import com.kodilla.patterns.factory.tasks.TaskFactory;
+import com.kodilla.patterns.factory.tasks.*;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TaskFactoryTestSuite {
 
-    @Mock
-    private Task taskMock;
     private final TaskFactory factory = new TaskFactory();
 
     @Test
@@ -20,10 +14,13 @@ public class TaskFactoryTestSuite {
         //Given
 
         //When
-        Task drivingTask = factory.makeTask(TaskFactory.DRIVING);
+        Task drivingTask = factory.createTask(TaskType.DRIVING);
+        boolean isTaskResult = drivingTask.isTaskExecuted();
         drivingTask.executeTask();
         //Then
         assertEquals("driving taxi", drivingTask.getTaskName());
+        assertTrue(drivingTask instanceof DrivingTask);
+        assertFalse(isTaskResult);
         assertTrue(drivingTask.isTaskExecuted());
     }
 
@@ -32,10 +29,13 @@ public class TaskFactoryTestSuite {
         //Given
 
         //When
-        Task paintingTask = factory.makeTask(TaskFactory.PAINTING);
+        Task paintingTask = factory.createTask(TaskType.PAINTING);
+        boolean isTaskResult = paintingTask.isTaskExecuted();
         paintingTask.executeTask();
         //Then
         assertEquals("Painting color", paintingTask.getTaskName());
+        assertTrue(paintingTask instanceof PaintingTask);
+        assertFalse(isTaskResult);
         assertTrue(paintingTask.isTaskExecuted());
     }
 
@@ -44,10 +44,13 @@ public class TaskFactoryTestSuite {
         //Given
 
         //When
-        Task shoppingTask = factory.makeTask(TaskFactory.SHOPPING);
+        Task shoppingTask = factory.createTask(TaskType.SHOPPING);
+        boolean isTaskResult = shoppingTask.isTaskExecuted();
         shoppingTask.executeTask();
         //Then
         assertEquals("Zakupy", shoppingTask.getTaskName());
+        assertTrue(shoppingTask instanceof ShoppingTask);
+        assertFalse(isTaskResult);
         assertTrue(shoppingTask.isTaskExecuted());
     }
 }
