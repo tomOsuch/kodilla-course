@@ -8,77 +8,77 @@ import java.util.List;
 
 public class Bigmac {
 
-    private final String bum;
-    private final double burgers;
-    private final String sauce;
-    private List<String> ingredients = new ArrayList<>();
+    private final String bun;
+    private final double burgersCount;
+    private final SauceType sauce;
+    private List<IngredientsType> ingredients = new ArrayList<>();
 
     public static class BigmacBuilder {
-        private String bum;
-        private double burgers;
-        private String sauce;
-        private final List<String> ingredients = new ArrayList<>();
+        private String bun;
+        private double burgersCount;
+        private SauceType sauce;
+        private final List<IngredientsType> ingredients = new ArrayList<>();
 
-        public BigmacBuilder bum(String bum) {
-            this.bum = bum;
+        public BigmacBuilder bun(String bun) {
+            this.bun = bun;
             return this;
         }
 
-        public BigmacBuilder burgers(double burgers) {
-            this.burgers = burgers;
+        public BigmacBuilder burgersCount(double burgersCount) {
+            this.burgersCount = burgersCount;
             return this;
         }
 
-        public BigmacBuilder sauce(String sauce) {
+        public BigmacBuilder sauce(SauceType sauce) {
             this.sauce = sauce;
             return this;
         }
 
-        public BigmacBuilder ingredient(String ingredient) {
+        public BigmacBuilder ingredient(IngredientsType ingredient) {
             this.ingredients.add(ingredient);
             return this;
         }
 
         public Bigmac build() {
-            return new Bigmac(bum, burgers, sauce, ingredients);
+            return new Bigmac(bun, burgersCount, sauce, ingredients);
         }
     }
 
-    public Bigmac(String bum, double burgers, String sauce, List<String> ingredients) {
-        this.bum = bum;
-        this.burgers = burgers;
+    public Bigmac(String bun, double burgersCount, SauceType sauce, List<IngredientsType> ingredients) {
+        this.bun = bun;
+        this.burgersCount = burgersCount;
         this.sauce = sauce;
         this.ingredients = new ArrayList<>(ingredients);
     }
 
-    public Bigmac(String bum, double burgers, String sauce, String... ingredients) {
-        this.bum = bum;
-        this.burgers = burgers;
+    public Bigmac(String bun, double burgersCount, SauceType sauce, IngredientsType... ingredients) {
+        this.bun = bun;
+        this.burgersCount = burgersCount;
         this.sauce = sauce;
         this.ingredients.addAll(Arrays.asList(ingredients));
     }
 
-    public String getBum() {
-        return bum;
+    public String getBun() {
+        return bun;
     }
 
-    public double getBurgers() {
-        return burgers;
+    public double getBurgersCount() {
+        return burgersCount;
     }
 
-    public String getSauce() {
+    public SauceType getSauce() {
         return sauce;
     }
 
-    public List<String> getIngredients() {
+    public List<IngredientsType> getIngredients() {
         return ingredients;
     }
 
     @Override
     public String toString() {
         return "Bigmac{" +
-                "bum='" + bum + '\'' +
-                ", burgers=" + burgers +
+                "bum='" + bun + '\'' +
+                ", burgers=" + burgersCount +
                 ", sauce='" + sauce + '\'' +
                 ", ingredients=" + ingredients +
                 '}';
