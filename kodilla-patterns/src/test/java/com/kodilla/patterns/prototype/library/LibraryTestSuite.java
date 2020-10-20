@@ -1,55 +1,53 @@
 package com.kodilla.patterns.prototype.library;
 
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
-import java.util.stream.IntStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class LibraryTestSuite {
 
-    private static final Library library = new Library("Koszykowa");
-
-    @BeforeEach
-    private void createLibrary() {
+    private Library createLibrary() {
+        Library library = new Library("Koszykowa");
         library.getBooks().add(new Book("Title 1", "Author 1", LocalDate.now()));
         library.getBooks().add(new Book("Title 2", "Author 2", LocalDate.now()));
+        return library;
     }
 
 
     @Test
     void testShallowCopy() throws CloneNotSupportedException {
         //Given
-        Library clonedLibrary = null;
-        clonedLibrary = library.shallowCopy();
-        clonedLibrary.setName("Płytki Klon Koszykowa");
+        Library originalLibrary = createLibrary();
         //When
-        library.getBooks().removeAll(library.getBooks());
+        Library clonedLibrary = originalLibrary.shallowCopy();
+        clonedLibrary.setName("Płytki Klon Koszykowa");
+        clonedLibrary.getBooks().remove(clonedLibrary.getBooks().iterator().next());
         //Then
-        assertEquals("Koszykowa", library.getName());
-        assertEquals(0, clonedLibrary.getBooks().size());
-        assertEquals(clonedLibrary.getBooks(), library.getBooks());
+        assertEquals("Koszykowa", originalLibrary.getName());
+        assertEquals(1,originalLibrary.getBooks().size());
+        assertEquals(1, clonedLibrary.getBooks().size());
+        assertEquals("Title 1", originalLibrary.getBooks().iterator().next().getTitle());
+        assertEquals("Title 1", clonedLibrary.getBooks().iterator().next().getTitle());
+        assertEquals(clonedLibrary.getBooks(), originalLibrary.getBooks());
         assertEquals("Płytki Klon Koszykowa", clonedLibrary.getName());
-        assertEquals(clonedLibrary.getBooks().hashCode(), library.getBooks().hashCode());
+        assertEquals(clonedLibrary.getBooks(), originalLibrary.getBooks());
     }
 
     @Test
     void testDeepCloned() throws CloneNotSupportedException {
         //Given
-        Library deepClonedLibrary = null;
-        deepClonedLibrary = library.deepCopy();
-        deepClonedLibrary.setName("Głęboki Klon Koszykowa");
+        Library originalLibrary = createLibrary();
         //When
-        library.getBooks().removeAll(library.getBooks());
+        Library deepClonedLibrary = originalLibrary.deepCopy();
+        deepClonedLibrary.setName("Głęboki Klon Koszykowa");
+        deepClonedLibrary.getBooks().remove(deepClonedLibrary.getBooks().iterator().next());
         //Then
-        assertEquals(2, deepClonedLibrary.getBooks().size());
+        assertEquals(2, originalLibrary.getBooks().size());
+        assertEquals(1, deepClonedLibrary.getBooks().size());
+        assertEquals("Title 1",deepClonedLibrary.getBooks().iterator().next().getTitle());
         assertEquals("Głęboki Klon Koszykowa", deepClonedLibrary.getName());
-        assertNotEquals(deepClonedLibrary.getBooks(), library.getBooks());
-        assertNotEquals(deepClonedLibrary.getBooks().hashCode(), library.getBooks().hashCode());
+        assertNotEquals(deepClonedLibrary.getBooks(), originalLibrary.getBooks());
     }
 }
