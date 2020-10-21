@@ -9,13 +9,13 @@ import java.util.List;
 public class Bigmac {
 
     private final Bun bun;
-    private final double burgersCount;
+    private final int burgersCount;
     private final Sauce sauce;
     private List<Ingredients> ingredients = new ArrayList<>();
 
     public static class BigmacBuilder {
         private Bun bun;
-        private double burgersCount;
+        private int burgersCount;
         private Sauce sauce;
         private final List<Ingredients> ingredients = new ArrayList<>();
 
@@ -24,7 +24,7 @@ public class Bigmac {
             return this;
         }
 
-        public BigmacBuilder burgersCount(double burgersCount) {
+        public BigmacBuilder burgersCount(int burgersCount) {
             this.burgersCount = burgersCount;
             return this;
         }
@@ -44,14 +44,14 @@ public class Bigmac {
         }
     }
 
-    public Bigmac(Bun bun, double burgersCount, Sauce sauce, List<Ingredients> ingredients) {
+    public Bigmac(Bun bun, int burgersCount, Sauce sauce, List<Ingredients> ingredients) {
         this.bun = bun;
         this.burgersCount = burgersCount;
         this.sauce = sauce;
         this.ingredients = new ArrayList<>(ingredients);
     }
 
-    public Bigmac(Bun bun, double burgersCount, Sauce sauce, Ingredients... ingredients) {
+    public Bigmac(Bun bun, int burgersCount, Sauce sauce, Ingredients... ingredients) {
         this.bun = bun;
         this.burgersCount = burgersCount;
         this.sauce = sauce;
@@ -62,7 +62,7 @@ public class Bigmac {
         return bun;
     }
 
-    public double getBurgersCount() {
+    public int getBurgersCount() {
         return burgersCount;
     }
 

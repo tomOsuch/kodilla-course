@@ -21,7 +21,7 @@ public class BigmacTestSuit {
         //When
         int homManyIngredients = bigmac.getIngredients().size();
         //Then
-        assertNotEquals(null, bigmac);
+        assertNotNull(bigmac);
         assertEquals(Bun.WITH_SESAME, bigmac.getBun());
         assertEquals(2, bigmac.getBurgersCount());
         assertEquals(Sauce.STANDARD, bigmac.getSauce());
