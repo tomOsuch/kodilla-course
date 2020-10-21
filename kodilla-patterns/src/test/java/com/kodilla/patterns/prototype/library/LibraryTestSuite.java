@@ -8,10 +8,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class LibraryTestSuite {
 
+    Book addBook = new Book("Title 1", "Author 1", LocalDate.now());
+    Book removeBook = new Book("Title 2", "Author 2", LocalDate.now());
+
     private Library createLibrary() {
         Library library = new Library("Koszykowa");
-        library.getBooks().add(new Book("Title 1", "Author 1", LocalDate.now()));
-        library.getBooks().add(new Book("Title 2", "Author 2", LocalDate.now()));
+        library.getBooks().add(addBook);
+        library.getBooks().add(removeBook);
         return library;
     }
 
@@ -23,13 +26,13 @@ public class LibraryTestSuite {
         //When
         Library clonedLibrary = originalLibrary.shallowCopy();
         clonedLibrary.setName("Płytki Klon Koszykowa");
-        clonedLibrary.getBooks().remove(clonedLibrary.getBooks().iterator().next());
+        clonedLibrary.getBooks().remove(removeBook);
         //Then
         assertEquals("Koszykowa", originalLibrary.getName());
         assertEquals(1,originalLibrary.getBooks().size());
         assertEquals(1, clonedLibrary.getBooks().size());
-        assertEquals("Title 1", originalLibrary.getBooks().iterator().next().getTitle());
-        assertEquals("Title 1", clonedLibrary.getBooks().iterator().next().getTitle());
+        assertTrue(originalLibrary.getBooks().contains(addBook));
+        assertTrue(clonedLibrary.getBooks().contains(addBook));
         assertEquals(clonedLibrary.getBooks(), originalLibrary.getBooks());
         assertEquals("Płytki Klon Koszykowa", clonedLibrary.getName());
         assertEquals(clonedLibrary.getBooks(), originalLibrary.getBooks());
@@ -42,11 +45,13 @@ public class LibraryTestSuite {
         //When
         Library deepClonedLibrary = originalLibrary.deepCopy();
         deepClonedLibrary.setName("Głęboki Klon Koszykowa");
-        deepClonedLibrary.getBooks().remove(deepClonedLibrary.getBooks().iterator().next());
+        deepClonedLibrary.getBooks().remove(removeBook);
         //Then
         assertEquals(2, originalLibrary.getBooks().size());
+        assertTrue(originalLibrary.getBooks().contains(addBook));
+        assertTrue(originalLibrary.getBooks().contains(removeBook));
         assertEquals(1, deepClonedLibrary.getBooks().size());
-        assertEquals("Title 1",deepClonedLibrary.getBooks().iterator().next().getTitle());
+        assertTrue(deepClonedLibrary.getBooks().contains(addBook));
         assertEquals("Głęboki Klon Koszykowa", deepClonedLibrary.getName());
         assertNotEquals(deepClonedLibrary.getBooks(), originalLibrary.getBooks());
     }
