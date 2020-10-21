@@ -1,5 +1,5 @@
 package com.kodilla.patterns.builder.bigmac;
 
-public enum SauceType {
+public enum Sauce {
     STANDARD, ISLAND , BARBECUE
 }

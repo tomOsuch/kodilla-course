@@ -1,5 +1,5 @@
 package com.kodilla.patterns.builder.bigmac;
 
-public enum IngredientsType {
+public enum Ingredients {
     LETTUCE, ONION, BACON, CUCUMBER, CHILLI, PEPPERS, MUSHROOMS, SHRIMPS, CHEESE
 }
