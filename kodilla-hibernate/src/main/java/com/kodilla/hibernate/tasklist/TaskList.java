@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "TASKLIST")
-public class TaskList {
+public final class TaskList {
     private int id;
     private String listName;
     private String description;
