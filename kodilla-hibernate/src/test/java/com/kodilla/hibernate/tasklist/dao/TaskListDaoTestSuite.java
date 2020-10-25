@@ -15,10 +15,11 @@ public class TaskListDaoTestSuite {
 
     @Autowired
     private TaskListDao taskListDao;
-    private static final String LIST_ToDo = "ToDo";
-    private static final String LIST_inProgress = "inProgress";
+    private static final String ListNameToDo = "ToDo";
+    private static final String ListNameInProgress = "inProgress";
     private TaskList taskListOne;
     private TaskList taskListTwo;
+    private TaskList taskListThird;
 
     @AfterEach
     public void cleanDao() {
@@ -29,19 +30,20 @@ public class TaskListDaoTestSuite {
     @Test
     void testTaskListDaoSave() {
         //Given
-        taskListOne = new TaskList(LIST_ToDo,"Task list description one test");
-        taskListTwo = new TaskList(LIST_inProgress, "Task list description two test");
+        taskListOne = new TaskList(ListNameToDo,"Task list description one test");
+        taskListTwo = new TaskList(ListNameInProgress, "Task list description two test");
+        taskListThird = new TaskList(ListNameToDo, "Task list ToDo");
         //When
         taskListDao.save(taskListOne);
         taskListDao.save(taskListTwo);
-        List<TaskList> readTaskListToDo = taskListDao.findByListName(LIST_ToDo);
-        List<TaskList> readTaskListInProgress = taskListDao.findByListName(LIST_inProgress);
+        taskListDao.save(taskListThird);
+        List<TaskList> readTaskListToDo = taskListDao.findByListName(ListNameToDo);
+        List<TaskList> readTaskListInProgress = taskListDao.findByListName(ListNameInProgress);
         //Then
-        assertEquals(1, readTaskListToDo.size());
+        assertEquals(2, readTaskListToDo.size());
         assertEquals(1, readTaskListInProgress.size());
-        assertEquals(LIST_ToDo, readTaskListToDo.get(0).getListName());
-        assertEquals(LIST_inProgress, readTaskListInProgress.get(0).getListName());
+        assertEquals("Task list description one test", readTaskListToDo.get(0).getDescription());
+        assertEquals("Task list ToDo", readTaskListToDo.get(1).getDescription());
+        assertEquals(ListNameInProgress, readTaskListInProgress.get(0).getListName());
     }
-
-
 }
