@@ -30,4 +30,18 @@ class TaskDaoTestSuite {
         //CleanUp
         taskDao.deleteById(id);
     }
+
+    @Test
+    void testTaskDaoSaveWithFinancialDetails() {
+        //Given
+        Task task = new Task(DESCRIPTION, 30);
+        //When
+        taskDao.save(task);
+        int id = task.getId();
+        //Then
+        assertNotEquals(0, id);
+
+        //CleanUp
+        //taskDao.deleteById(id);
+    }
 }
