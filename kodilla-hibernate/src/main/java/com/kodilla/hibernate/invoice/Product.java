@@ -12,7 +12,7 @@ public class Product {
 
     private int id;
     private String name;
-    private List<Item> itemsProduct = new ArrayList<>();
+    private List<Item> itemsProduct;
 
     public Product() {
 
@@ -20,6 +20,7 @@ public class Product {
 
     public Product(String name) {
         this.name = name;
+        this.itemsProduct = new ArrayList<>();
     }
 
     @Id
@@ -46,11 +47,11 @@ public class Product {
         return itemsProduct;
     }
 
-    public void setId(int id) {
+    private void setId(int id) {
         this.id = id;
     }
 
-    public void setName(String name) {
+    private void setName(String name) {
         this.name = name;
     }
 

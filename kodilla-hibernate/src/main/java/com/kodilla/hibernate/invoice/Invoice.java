@@ -1,6 +1,5 @@
 package com.kodilla.hibernate.invoice;
 
-import com.kodilla.hibernate.invoice.Item;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -13,7 +12,7 @@ public class Invoice {
 
     private int id;
     private String number;
-    private List<Item> items = new ArrayList<>();
+    private List<Item> itemsInvoice;
 
     public Invoice() {
 
@@ -21,6 +20,7 @@ public class Invoice {
 
     public Invoice(String number) {
         this.number = number;
+        this.itemsInvoice = new ArrayList<>();
     }
 
     @Id
@@ -42,8 +42,8 @@ public class Invoice {
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    public List<Item> getItems() {
-        return items;
+    public List<Item> getItemsInvoice() {
+        return itemsInvoice;
     }
 
     private void setId(int id) {
@@ -54,7 +54,7 @@ public class Invoice {
         this.number = number;
     }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
+    private void setItemsInvoice(List<Item> items) {
+        this.itemsInvoice = items;
     }
 }
