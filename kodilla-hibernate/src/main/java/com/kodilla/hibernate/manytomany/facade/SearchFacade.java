@@ -26,25 +26,20 @@ public class SearchFacade {
         this.employeeDao = employeeDao;
     }
 
-    public List<Company> findCompanies(final String letters) throws SearchFacadeException {
+    public List<Company> findCompanies(final String letters){
         LOGGER.info("Searching companies by partname");
-        List<Company> companies = companyDao.searchCompanyByPartName("%" + letters + "%");
-
-        int companiesAmount = companies.size();
-        if (companiesAmount == 0) {
-            LOGGER.error(SearchFacadeException.ERR_COMPANY_NOT_FOUND);
-            throw new SearchFacadeException(SearchFacadeException.ERR_COMPANY_NOT_FOUND);
+        List<Company> companies = companyDao.searchCompanyByPartName(letters);
+        if (companies.size() == 0) {
+            LOGGER.info("Cannot find such company name");
         }
         return companies;
     }
 
-    public List<Employee> findEmployees(final String letters) throws SearchFacadeException {
+    public List<Employee> findEmployees(final String letters) {
         LOGGER.info("Searching employees by partname");
-        List<Employee> employees = employeeDao.findByFewLetters("%" + letters + "%");
-        int employeesAmount = employees.size();
-        if (employeesAmount == 0) {
-            LOGGER.error(SearchFacadeException.ERR_EMPLOYEE_NOT_FOUND);
-            throw new SearchFacadeException(SearchFacadeException.ERR_EMPLOYEE_NOT_FOUND);
+        List<Employee> employees = employeeDao.findByFewLetters(letters);
+        if (employees.size() == 0) {
+            LOGGER.info("Cannot find such employee name");
         }
 
         return employees;
