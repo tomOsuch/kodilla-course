@@ -1,7 +1,5 @@
 package com.kodilla.patterns2.decorator.pizza;
 
-import com.kodilla.patterns2.decorator.pizza.BasicPizzaOrder;
-import com.kodilla.patterns2.decorator.pizza.PizzaOrder;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -11,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class PizzaOrderTestSuite {
 
     @Test
-    public void testBasicPizzaOrderGetCost() {
+    public void testBasicPizzaOrderCost() {
         //Given
         PizzaOrder pizzaOrder = new BasicPizzaOrder();
         //When
@@ -21,7 +19,7 @@ public class PizzaOrderTestSuite {
     }
 
     @Test
-    public void testBasicPizzaOrderGetDescription() {
+    public void testBasicPizzaOrderDescription() {
         //Given
         PizzaOrder pizzaOrder = new BasicPizzaOrder();
         //When
@@ -31,7 +29,7 @@ public class PizzaOrderTestSuite {
     }
 
     @Test
-    public void testPepperoniPizzaGetCost() {
+    public void testPepperoniPizzaCost() {
         //Given
         PizzaOrder pizzaOrder = new BasicPizzaOrder();
         pizzaOrder = new PepperoniPizzaDecorator(pizzaOrder);
@@ -42,18 +40,18 @@ public class PizzaOrderTestSuite {
     }
 
     @Test
-    public void testPepperoniPizzaGetDescription() {
+    public void testPepperoniPizzaDescription() {
         //Given
         PizzaOrder pizzaOrder = new BasicPizzaOrder();
         pizzaOrder = new PepperoniPizzaDecorator(pizzaOrder);
         //When
         String description = pizzaOrder.getDescription();
         //Then
-        assertEquals("Pizza, Tomato Sauce, Mozzarella, Pepperoni, Salami", description);
+        assertEquals("Pizza, Tomato Sauce, Mozzarella, Pepperoni", description);
     }
 
     @Test
-    public void testPizzaArugulaGetCost() {
+    public void testPizzaSalamiAndArugulaCost() {
         //Given
         PizzaOrder pizzaOrder = new BasicPizzaOrder();
         pizzaOrder = new PizzaSalamiDecorator(pizzaOrder);
@@ -65,7 +63,7 @@ public class PizzaOrderTestSuite {
     }
 
     @Test
-    public void testPizzaArugulaGetDescription() {
+    public void testPizzaSalamiAndArugulaDescription() {
         //Given
         PizzaOrder pizzaOrder = new BasicPizzaOrder();
         pizzaOrder = new PizzaSalamiDecorator(pizzaOrder);
@@ -77,7 +75,7 @@ public class PizzaOrderTestSuite {
     }
 
     @Test
-    public void testPizzaJalapenosGetCost() {
+    public void testPizzaJalapenosCost() {
         //Given
         PizzaOrder pizzaOrder = new BasicPizzaOrder();
         pizzaOrder = new PizzaJalapenosDecorator(pizzaOrder);
@@ -88,7 +86,7 @@ public class PizzaOrderTestSuite {
     }
 
     @Test
-    public void testPizzaJalapenosGetDescription() {
+    public void testPizzaJalapenosDescription() {
         //Given
         PizzaOrder pizzaOrder = new BasicPizzaOrder();
         pizzaOrder = new PizzaJalapenosDecorator(pizzaOrder);

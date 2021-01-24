@@ -15,6 +15,6 @@ public class PepperoniPizzaDecorator extends AbstractPizzaOrderDecorator {
 
     @Override
     public String getDescription() {
-        return super.getDescription() + ", Pepperoni," + " Salami";
+        return super.getDescription() + ", Pepperoni";
     }
 }
