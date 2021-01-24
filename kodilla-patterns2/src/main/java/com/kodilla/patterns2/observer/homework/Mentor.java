@@ -3,7 +3,7 @@ package com.kodilla.patterns2.observer.homework;
 public class Mentor implements Observer {
 
     private final String name;
-    private int updateCount;
+    private int totalTaskCount;
 
     public Mentor(String name) {
         this.name = name;
@@ -13,17 +13,17 @@ public class Mentor implements Observer {
         return name;
     }
 
-    public int getUpdateCount() {
-        return updateCount;
+    public int getTotalTaskCount() {
+        return totalTaskCount;
     }
 
     @Override
     public void notifyAboutNewTask(TraineeTasks traineeTasks) {
         System.out.println(
                 "Twój kursant: " + traineeTasks.getTrainee().getName() +
-                        " dodał zadanie: " + traineeTasks.getTasks().peekLast() +
-                        " Liczba wszystkich zadań kursanta to: " + traineeTasks.getTasks().size()
+                        " dodał zadanie: " + traineeTasks.getLastTask(traineeTasks.getTasks()) +
+                        " Liczba wszystkich zadań kursanta to: " + traineeTasks.getTaskCount(traineeTasks.getTasks())
         );
-        updateCount++;
+        totalTaskCount++;
     }
 }

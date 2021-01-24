@@ -30,7 +30,7 @@ public class TaskTestSuite {
         assertEquals(2, alaTask.getTasks().size());
         assertEquals(2, tomasTask.getTasks().size());
         assertEquals(3, alexTask.getTasks().size());
-        assertEquals(5, adamMentor.getUpdateCount());
-        assertEquals(2, janMentor.getUpdateCount());
+        assertEquals(5, adamMentor.getTotalTaskCount());
+        assertEquals(2, janMentor.getTotalTaskCount());
     }
 }

@@ -46,4 +46,12 @@ public class TraineeTasks implements QueueObservable {
     public void removeObserver(Observer observer) {
         observers.remove(observer);
     }
+
+    public String getLastTask(Deque<String> tasks) {
+        return tasks.getLast();
+    }
+
+    public int getTaskCount(Deque<String> tasks) {
+        return tasks.size();
+    }
 }
