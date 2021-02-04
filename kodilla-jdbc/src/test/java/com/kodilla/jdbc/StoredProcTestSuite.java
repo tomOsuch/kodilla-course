@@ -1,6 +1,8 @@
 package com.kodilla.jdbc;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,23 +32,30 @@ public class StoredProcTestSuite {
         assertEquals(0, howMany);
     }
 
-    @Test
-    public void testUpdateBestsellers() throws SQLException {
+    @ParameterizedTest
+    @ValueSource(strings = {"= TRUE;", "= FALSE;", "IS NULL;"})
+    public void testUpdateBestsellers(String sqlWhere) throws SQLException {
         //Given
         DbManager dbManager = DbManager.getInstance();
-        String sqlUpdate = "UPDATE BOOKS SET BESTSELLER = false;";
+        String sqlUpdate = "UPDATE BOOKS SET BESTSELLER = null;";
         Statement statement = dbManager.getConnection().createStatement();
         statement.executeUpdate(sqlUpdate);
         //When
         String sqlProcedureCall = "CALL UpdateBestsellers()";
         statement.executeUpdate(sqlProcedureCall);
         //Then
-        String sqlCheckTable = "SELECT count(*) AS BESTSELLERS_COUNT FROM BOOKS WHERE BESTSELLER IS TRUE ;";
+        String sqlCheckTable = "SELECT count(*) AS BESTSELLERS_COUNT FROM BOOKS WHERE BESTSELLER " + sqlWhere;
         ResultSet rs = statement.executeQuery(sqlCheckTable);
         Integer bestsellerCount = null;
         if (rs.next()) {
             bestsellerCount = rs.getInt("BESTSELLERS_COUNT");
         }
-        assertEquals(4, bestsellerCount);
+        if (sqlWhere.equals("= TRUE;")) {
+            assertEquals(4, bestsellerCount);
+        } else if (sqlWhere.equals("= FALSE;")) {
+            assertEquals(6, bestsellerCount);
+        } else {
+            assertEquals(0, bestsellerCount);
+        }
     }
 }
