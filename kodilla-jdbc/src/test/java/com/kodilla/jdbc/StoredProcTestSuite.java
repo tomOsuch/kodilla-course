@@ -2,15 +2,30 @@ package com.kodilla.jdbc;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
+import java.util.Collection;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@RunWith(Parameterized.class)
 public class StoredProcTestSuite {
+
+    @Parameterized.Parameter(0)
+    private String query;
+    @Parameterized.Parameter(1)
+    private int resultQuery;
+
+    @Parameterized.Parameters(name = "{index}: factorial({0}) = {1}")
+    public static Collection<Object[]> data() {
+        return Arrays.asList(new Object[][]
+                {{" = TRUE", 4}, {" = FALSE", 6}, {" IS NULL", 0}});
+    }
 
     @Test
     public void testUpdateVipLevels() throws SQLException {
@@ -32,9 +47,8 @@ public class StoredProcTestSuite {
         assertEquals(0, howMany);
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"= TRUE;", "= FALSE;", "IS NULL;"})
-    public void testUpdateBestsellers(String sqlWhere) throws SQLException {
+    @Test
+    public void testUpdateBestsellers() throws SQLException {
         //Given
         DbManager dbManager = DbManager.getInstance();
         String sqlUpdate = "UPDATE BOOKS SET BESTSELLER = null;";
@@ -43,19 +57,15 @@ public class StoredProcTestSuite {
         //When
         String sqlProcedureCall = "CALL UpdateBestsellers()";
         statement.executeUpdate(sqlProcedureCall);
-        //Then
-        String sqlCheckTable = "SELECT count(*) AS BESTSELLERS_COUNT FROM BOOKS WHERE BESTSELLER " + sqlWhere;
+
+        String sqlCheckTable = "SELECT count(*) AS BESTSELLERS_COUNT FROM BOOKS WHERE BESTSELLER " + query + ";";
         ResultSet rs = statement.executeQuery(sqlCheckTable);
         Integer bestsellerCount = null;
         if (rs.next()) {
             bestsellerCount = rs.getInt("BESTSELLERS_COUNT");
         }
-        if (sqlWhere.equals("= TRUE;")) {
-            assertEquals(4, bestsellerCount);
-        } else if (sqlWhere.equals("= FALSE;")) {
-            assertEquals(6, bestsellerCount);
-        } else {
-            assertEquals(0, bestsellerCount);
-        }
+
+        //Then
+        assertEquals(resultQuery,bestsellerCount);
     }
 }
