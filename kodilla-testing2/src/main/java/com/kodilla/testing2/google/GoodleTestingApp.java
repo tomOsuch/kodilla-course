@@ -1,4 +1,4 @@
-package com.kodilla.testing.google;
+package com.kodilla.testing2.google;
 
 import com.kodilla.testing2.config.WebDriverConfig;
 import org.openqa.selenium.By;
