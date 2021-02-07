@@ -51,18 +51,15 @@ public class CrudAppTestSuite {
     }
 
     private void deleteCrudAppTestTask(String taskName) throws InterruptedException {
-        while(!driver.findElement(By.xpath("//select[1]")).isDisplayed());
-
         driver.findElements(
                 By.xpath("//form[@class=\"datatable__row\"]")).stream()
                 .filter(anyForm ->
                         anyForm.findElement(By.xpath(".//fieldset[1]/p[@class=\"datatable__field-value\"]"))
                             .getText().equals(taskName))
                 .forEach(theForm -> {
-                    WebElement button = theForm.findElement(By.xpath(".//button[4]"));
+                    WebElement button = theForm.findElement(By.xpath(".//button[contains(text(),\"Delete\")]"));
                     button.click();
                 });
-        Thread.sleep(5000);
     }
 
     private void sendTestTaskToTrello(String taskName) throws InterruptedException {
