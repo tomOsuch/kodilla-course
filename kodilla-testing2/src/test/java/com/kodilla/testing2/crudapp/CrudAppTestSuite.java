@@ -54,12 +54,13 @@ public class CrudAppTestSuite {
 
     private void deleteCrudAppTestTask(String taskName) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//select[1]")));
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//select[contains(name, 'board-name')]")));
 
         driver.findElements(
                 By.xpath("//form[@class=\"datatable__row\"]")).stream()
                 .filter(anyForm ->
-                        anyForm.findElement(By.xpath(".//fieldset[1]/p[@class=\"datatable__field-value\"]"))
+                        anyForm.findElement(By.xpath(".//fieldset[@class=\"datatable__row-section datatable__row-section--input-section\"]/p[@class=\"datatable__field-value\"]"))
                             .getText().equals(taskName))
                 .forEach(theForm -> {
                     WebElement button = theForm.findElement(By.xpath(".//button[contains(text(),\"Delete\")]"));
