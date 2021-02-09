@@ -9,9 +9,12 @@ import java.util.List;
 
 @NamedNativeQuery(
         name = "Company.retrieveCompanyWithNameBeginning",
-        query = "SELECT * FROM COMPANY" +
-                " WHERE LEFT(COMPANY_NAME, 3) = :NAME",
+        query = "SELECT * FROM COMPANY WHERE LEFT(COMPANY_NAME, 3) = :NAME",
         resultClass = Company.class
+)
+@NamedQuery(
+        name = "Company.retrieveCompaniesWithNameContainsGivenLetters",
+        query = "FROM Company WHERE name LIKE Concat('%', :LETTERS, '%')"
 )
 @Entity
 @Table(name = "COMPANY")
