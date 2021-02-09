@@ -7,7 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Random;
 
@@ -51,6 +53,9 @@ public class CrudAppTestSuite {
     }
 
     private void deleteCrudAppTestTask(String taskName) throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//select[1]")));
+
         driver.findElements(
                 By.xpath("//form[@class=\"datatable__row\"]")).stream()
                 .filter(anyForm ->
