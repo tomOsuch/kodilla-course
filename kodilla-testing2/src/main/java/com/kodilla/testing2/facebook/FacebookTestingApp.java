@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 public class FacebookTestingApp {
 
     public static final String XPATH_COOKIES = "//div[contains(@class, \"_9fiw\")]/button[2]";
-    public static final String XPATH_REGISTRATION_ACCOUNT = "//div[contains(@class, \"_6ltg\")]/a";
+    public static final String XPATH_REGISTRATION_ACCOUNT = "//a[contains(text(), \"Utwórz nowe konto\")]/a";
     public static final String ID_BIRTH_DAY = "day";
     public static final String ID_BIRTH_MONTH = "month";
     public static final String ID_BIRTH_YEAR = "year";
