@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 
 public class EBayTestingApp {
 
-    public static final String SEARCHFIELD = "gh-tb";
+    private static final String SEARCHFIELD = "gh-tb";
 
     public static void main(String[] args) {
 
