@@ -2,6 +2,8 @@ package com.kodilla.jdbc;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
@@ -10,21 +12,19 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@RunWith(Parameterized.class)
+
 public class StoredProcTestSuite {
 
-    @Parameterized.Parameter(0)
-    private String query;
-    @Parameterized.Parameter(1)
-    private int resultQuery;
-
-    @Parameterized.Parameters(name = "{index}: factorial({0}) = {1}")
-    public static Collection<Object[]> data() {
-        return Arrays.asList(new Object[][]
-                {{" = TRUE", 4}, {" = FALSE", 6}, {" IS NULL", 0}});
+    private static Stream<Arguments> dataSql() {
+        return Stream.of(
+                Arguments.of(" = TRUE", 4),
+                Arguments.of(" = FALSE", 6),
+                Arguments.of(" Is NULL", 0)
+        );
     }
 
     @Test
@@ -47,8 +47,9 @@ public class StoredProcTestSuite {
         assertEquals(0, howMany);
     }
 
-    @Test
-    public void testUpdateBestsellers() throws SQLException {
+    @ParameterizedTest
+    @MethodSource("dataSql")
+    public void testUpdateBestsellers2(String query, int resultQuery) throws SQLException {
         //Given
         DbManager dbManager = DbManager.getInstance();
         String sqlUpdate = "UPDATE BOOKS SET BESTSELLER = null;";
