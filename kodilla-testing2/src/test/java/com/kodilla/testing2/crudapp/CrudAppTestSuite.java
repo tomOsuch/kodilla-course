@@ -7,7 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Random;
 
@@ -48,6 +50,22 @@ public class CrudAppTestSuite {
         Thread.sleep(2000);
 
         return taskName;
+    }
+
+    private void deleteCrudAppTestTask(String taskName) throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//select[contains(name, 'board-name')]")));
+
+        driver.findElements(
+                By.xpath("//form[@class=\"datatable__row\"]")).stream()
+                .filter(anyForm ->
+                        anyForm.findElement(By.xpath(".//fieldset[@class=\"datatable__row-section datatable__row-section--input-section\"]/p[@class=\"datatable__field-value\"]"))
+                            .getText().equals(taskName))
+                .forEach(theForm -> {
+                    WebElement button = theForm.findElement(By.xpath(".//button[contains(text(),\"Delete\")]"));
+                    button.click();
+                });
     }
 
     private void sendTestTaskToTrello(String taskName) throws InterruptedException {
@@ -109,5 +127,6 @@ public class CrudAppTestSuite {
         String taskName = createCrudAppTestTask();
         sendTestTaskToTrello(taskName);
         assertTrue(checkTaskExistsInTrello(taskName));
+        deleteCrudAppTestTask(taskName);
     }
 }
