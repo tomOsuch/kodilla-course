@@ -4,11 +4,8 @@ import java.util.Scanner;
 
 public class SudokuGame {
 
-    private int columnNo;
-    private int rowNo;
-    private Integer number;
-    SudokuBoard board = new SudokuBoard(9);
-    InputValidator inputValidator = new InputValidator();
+    private SudokuBoard board = new SudokuBoard(9);
+    private final UserInput userInput = new UserInput();
 
     public SudokuGame() {
 
@@ -23,16 +20,14 @@ public class SudokuGame {
         String input = "";
         Scanner sc = new Scanner(System.in);
         ValueLocator locator = new ValueLocator();
-        while (!"SUDOKU".equals(input.toUpperCase())) {
+        while (!"SUDOKU".equalsIgnoreCase(input)) {
             boolean correctInput = false;
             input = sc.next();
-            if (!"SUDOKU".equals(input.toUpperCase())) {
-                if (inputValidator.isInputOk(input)) {
-                    columnNo = inputValidator.getColumnNo();
-                    rowNo = inputValidator.getRowNo();
-                    number = inputValidator.getNumber();
-                    this.board = locator.locateSudokuElement(board, columnNo, rowNo, number);
+            if (!"SUDOKU".equalsIgnoreCase(input)) {
+                if (userInput.isInputOk(input)) {
+                    this.board = locator.locateSudokuElement(board, userInput.getColumnNo(), userInput.getRowNo(), userInput.getNumber());
                 }
+
             }
         }
         SudokuSolver solver = new SudokuSolver();

@@ -1,6 +1,6 @@
 package com.kodilla.sudoku;
 
-public class InputValidator {
+public class UserInput {
 
     int columnNo;
     int rowNo;
@@ -26,9 +26,6 @@ public class InputValidator {
             number = Integer.parseInt(input.substring(4, 5));
             if (columnNo > 0 && columnNo <= 9 && rowNo > 0 && rowNo <= 9 && number > 0 && number <= 9) {
                 correctInput = true;
-                if (!correctInput) {
-                    System.out.println("Wprowadziłeś niepoprawne dane!");
-                }
             }
         } catch (Exception e) {
             System.out.println("Wprowadziłeś niepoprawne dane!");
