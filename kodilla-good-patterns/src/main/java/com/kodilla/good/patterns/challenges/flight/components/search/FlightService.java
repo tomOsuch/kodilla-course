@@ -1,16 +1,22 @@
 package com.kodilla.good.patterns.challenges.flight.components.search;
 
 import com.kodilla.good.patterns.challenges.flight.components.model.Flight;
+import com.kodilla.good.patterns.challenges.flight.components.model.Journey;
 
-import java.util.Set;
+import java.util.List;
 
 public interface FlightService {
 
-    Set<Flight> findFlightFromAirport(String searchedDepartureAirport);
 
-    Set<Flight> findFlightToAirport(String searchedArrivalAirport);
+    List<Flight> getFlightsFromCity(String city);
 
-    Set<Flight> findStopoverAirport(String searchedDepartureAirport, String searchedArrivalAirport);
+    List<Flight> getFlightsToCity(String city);
 
-    Set<Flight> forEachFindStopoverAirport(String searchedDepartureAirport, String searchedArrivalAirport);
+    List<Journey> getFlightsFromTo(String departure, String arrival);
+
+    void displayFlightsTo(String city);
+
+    void displayFlightsFrom(String city);
+
+    void displayFlightsFromTo(String derparture, String arrival);
 }

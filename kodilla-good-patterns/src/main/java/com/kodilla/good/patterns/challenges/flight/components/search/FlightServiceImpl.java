@@ -1,85 +1,89 @@
 package com.kodilla.good.patterns.challenges.flight.components.search;
 
 import com.kodilla.good.patterns.challenges.flight.components.model.Flight;
+import com.kodilla.good.patterns.challenges.flight.components.model.Journey;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class FlightServiceImpl implements FlightService {
 
-    private final FlightList flightList = new FlightList();
-    private final Set<Flight> flights = flightList.initFlightList();
+    private final FlightDatabase database = new FlightDatabase();
 
     @Override
-    public Set<Flight> findFlightFromAirport(String searchedDepartureAirport) {
+    public List<Flight> getFlightsFromCity(final String city) {
 
-        return flights.stream()
-                .filter(n -> n.getDepartureAirport().equals(searchedDepartureAirport))
-                .collect(Collectors.toSet());
+        return database.getFlights()
+                .stream()
+                .filter(flight -> flight.getDeparture().equals(city.toUpperCase()))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Set<Flight> findFlightToAirport(String searchedArrivalAirport) {
+    public List<Flight> getFlightsToCity(final String city) {
 
-        return flights.stream()
-                .filter(n -> n.getArrivalAirport().equals(searchedArrivalAirport))
-                .collect(Collectors.toSet());
+        return database.getFlights()
+                .stream()
+                .filter(flight -> flight.getArrival().equals(city.toUpperCase()))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Set<Flight> findStopoverAirport(String searchedDepartureAirport, String searchedArrivalAirport) {
-        Set<Flight> startFlights = findFlightFromAirport(searchedDepartureAirport).stream()
-                .filter(n -> !n.getArrivalAirport().equals(searchedArrivalAirport))
-                .collect(Collectors.toSet());
+    public List<Journey> getFlightsFromTo(final String departure, final String arrival) {
 
+        List<Journey> results = database.getFlights()
+                .stream()
+                .filter(isFlightInDatabase(departure, arrival))
+                .map(Journey::new)
+                .collect(Collectors.toList());
 
-        Set<Flight> endFlights = findFlightToAirport(searchedArrivalAirport).stream()
-                .filter(n -> !n.getDepartureAirport().equals(searchedDepartureAirport))
-                .collect(Collectors.toSet());
-
-        Set<Flight> firstPartOfTrip = startFlights.stream()
-                .filter(flight -> endFlights.stream()
-                        .map(t -> t.getDepartureAirport())
-                        .collect(Collectors.toList()).contains(flight.getArrivalAirport()))
-                .collect(Collectors.toSet());
-        Set<Flight> secondPartOfTrip = endFlights.stream()
-                .filter(flight -> startFlights.stream()
-                        .map(t -> t.getArrivalAirport())
-                        .collect(Collectors.toList()).contains(flight.getDepartureAirport()))
-                .collect(Collectors.toSet());
-        return new HashSet<>() {{
-            addAll(secondPartOfTrip);
-            addAll(firstPartOfTrip);
-        }};
+        addPossibleIndirectFlights(departure, arrival, results);
+        return results;
     }
 
-    @Override
-    public Set<Flight> forEachFindStopoverAirport(String searchedDepartureAirport, String searchedArrivalAirport) {
-        Set<Flight> flightStopover = new HashSet<>();
-        for(Flight flightFrom : findFlightFromAirport(searchedDepartureAirport)){
-            for(Flight flightTo : findFlightToAirport(searchedArrivalAirport)) {
-                if (flightFrom.getArrivalAirport().equals(flightTo.getDepartureAirport())){
-                    flightStopover.add(flightFrom);
-                    flightStopover.add(flightTo);
-                };
+    private void addPossibleIndirectFlights(String departure, String arrival, List<Journey> results) {
+        for (Flight flightFrom : getFlightsFromCity(departure)) {
+            for (Flight flightTo : getFlightsToCity(arrival)) {
+                if (flightFrom.getArrival().equals(flightTo.getDeparture())) {
+                    Journey journey = new Journey(flightFrom, flightTo);
+                    results.add(journey);
+                }
             }
         }
-        return flightStopover;
+    }
+
+    private Predicate<Flight> isFlightInDatabase(String departure, String arrival) {
+        return flight -> flight.getDeparture().equals(departure.toUpperCase())
+                && flight.getArrival().equals(arrival.toUpperCase());
     }
 
     @Override
-    public int hashCode() {
-        return super.hashCode();
+    public void displayFlightsTo(final String city) {
+        List<Flight> flights = getFlightsToCity(city);
+        displaySelectedFlights(flights);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public void displayFlightsFrom(final String city) {
+        List<Flight> flights = getFlightsFromCity(city);
+        displaySelectedFlights(flights);
     }
 
     @Override
-    public String toString() {
-        return super.toString();
+    public void displayFlightsFromTo(final String derparture, final String arrival) {
+        List<Journey> flights = getFlightsFromTo(derparture, arrival);
+        displaySelectedFlights(flights);
+    }
+
+    private void displaySelectedFlights(List flights) {
+        if (flights.isEmpty()) {
+            System.out.println("Such flights don't exist.");
+        } else {
+            flights.forEach(System.out::println);
+            System.out.println();
+        }
     }
 }
