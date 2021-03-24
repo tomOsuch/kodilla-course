@@ -6,8 +6,8 @@ public class ApplicationFlight {
 
     public static void main(String[] args) {
         FlightServiceImpl flightService = new FlightServiceImpl();
-         flightService.findFlightsFrom("Gdańsk");
-         flightService.findFlightsTo("Wrocław");
-         flightService.findFlightsWithInterstation("Gdańsk", "Kraków", "Wrocław");
+         flightService.displayFlightsFrom("Gdańsk");
+         flightService.displayFlightsTo("Wrocław");
+         flightService.displayFlightsFromTo("Gdańsk", "Wrocław");
     }
 }

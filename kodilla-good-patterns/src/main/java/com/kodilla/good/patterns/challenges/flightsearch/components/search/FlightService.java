@@ -1,9 +1,21 @@
 package com.kodilla.good.patterns.challenges.flightsearch.components.search;
 
+import com.kodilla.good.patterns.challenges.flightsearch.components.model.Flight;
+import com.kodilla.good.patterns.challenges.flightsearch.components.model.Journey;
+
+import java.util.List;
+
 public interface FlightService {
-    void findFlightsFrom(String source);
 
-    void findFlightsTo(String destination);
+    List<Flight> getFlightsFromCity(String city);
 
-    void findFlightsWithInterstation(String source, String interstation, String destination);
+    List<Flight> getFlightsToCity(String city);
+
+    List<Journey> getFlightsFromTo(String departure, String arrival);
+
+    void displayFlightsTo(String city);
+
+    void displayFlightsFrom(String city);
+
+    void displayFlightsFromTo(String derparture, String arrival);
 }

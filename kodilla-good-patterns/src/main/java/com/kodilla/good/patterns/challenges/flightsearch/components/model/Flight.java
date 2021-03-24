@@ -2,24 +2,23 @@ package com.kodilla.good.patterns.challenges.flightsearch.components.model;
 
 public class Flight {
 
-    final private String source;
-    final private String destination;
+    private final String departure;
+    private final String arrival;
 
-    public Flight(final String source, final String destination) {
-        this.source = source;
-        this.destination = destination;
+    public Flight(final String departure, final String arrival) {
+        this.departure = departure;
+        this.arrival = arrival;
     }
 
-    public String getSource() {
-        return source;
+    public String toString() {
+        return "Flight from " + this.departure + " to " + this.arrival;
     }
 
-    public String getDestination() {
-        return destination;
+    public String getDeparture() {
+        return departure;
     }
 
-    @Override
-    public int hashCode() {
-        return source.hashCode() * destination.hashCode();
+    public String getArrival() {
+        return arrival;
     }
 }
